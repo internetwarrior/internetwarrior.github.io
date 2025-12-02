@@ -1,4 +1,4 @@
-let VOLUME = 0.09;
+let VOLUME = 0.2;
 // VOLUME = 0;
 
 const COLOR_OBJ = {
@@ -6,6 +6,10 @@ const COLOR_OBJ = {
   color_2: 250,
   color_3: 250,
 };
+
+const songs = ["intro_3.m4a", "intro.m4a", "song_2.mp3"];
+
+let song_name = songs[0];
 
 const WORD_STORAGE = [
   "Туда их!",
@@ -20,7 +24,18 @@ const WORD_STORAGE = [
   "Woops...",
   "Anger!",
   "Hello, world!",
+  "CI PASTI!",
 ];
+
+const bg = document.getElementById("background");
+const hero = document.getElementById("hero");
+
+document.addEventListener("mousemove", (e) => {
+  const x = e.clientX / window.innerWidth - 0.5;
+  const y = e.clientY / window.innerHeight - 0.5;
+  bg.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
+  hero.style.transform = `translate(${x * 2}px, ${y * 2}px)`;
+});
 
 BAR_WIDTH = 0.2;
 
@@ -50,7 +65,7 @@ async function loadDefaultAudio() {
   startElement.style.opacity = "0";
   setTimeout(() => (startElement.style.display = "none"), 300);
 
-  const response = await fetch("./intro.m4a");
+  const response = await fetch(`./${song_name}`);
   // const response = await fetch("./song_2.mp3");
   const arrayBuffer = await response.arrayBuffer();
   processArrayBuffer(arrayBuffer);
