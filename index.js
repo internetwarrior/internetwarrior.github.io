@@ -1,8 +1,10 @@
 let VOLUME = 0.2;
-VOLUME = 0.25;
-let debug = false;
+VOLUME = 0.5;
 let defaultSpeed = 30;
 let speed = defaultSpeed;
+let inverse = true;
+
+let debug = false;
 speed = 20;
 
 if (debug) {
@@ -65,7 +67,9 @@ let WORD_STORAGE = [
   "-Не выводи меня из себя!",
   "-Я тебе уже сказала... ",
   "-Я знаю!",
-  "Ля, Ты тупая!",
+  // "Ля, Ты тупая!",
+  // "Ты просто дура!",
+  // "Ты просто дура!",
   // "#ФактыПримиXD",
   // "-Это любовь)  <3 ",
 ];
@@ -79,21 +83,27 @@ WORD_STORAGE = [
   "#SAME_AGAIN",
   "#GET_BACK",
   "#KNOWLEDGE",
+  // "#LOOKING_FOR_THE_JACKPOT?",
   "#ТЫ_КТО_ТАКОЙ!?",
-  "#LIMITS",
+  "#KNOWLEDGE_LIMITS",
   "#BE_CAREFUL",
   "#IMPROVE",
   "#JUST_MAKE_IT_DONE",
   "#CRITICAL_THINKING",
+  "#TACTICAL_RETREAT_777",
   "#ACTIVISION",
   "#BE_AFRAID",
   "#DON'T_MISTAKE",
+  // "#WASTE",
+  "#EARN_BACK",
+  // "#STABILIZE",
   "#PERFECT",
   "#UNPERFECT",
   "#THINK_FAST",
   "#GIVE_UP",
   "#ЗДРАВСТВУЙ!",
-  "#DON'T_UP",
+  "#НАТИСК?",
+  // "#KEEP_THE_BALANCE!",
 ];
 
 const bg = document.getElementById("background");
@@ -107,9 +117,28 @@ function settingsButton() {
 document.addEventListener("mousemove", (e) => {
   const x = e.clientX / window.innerWidth - 0.5;
   const y = e.clientY / window.innerHeight - 0.5;
-  bg.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
-  antiHero.style.transform = `translate(${x * -80}px, ${y * -80}px)`;
-  hero.style.transform = `translate(${x * 120}px, ${y * 40}px)`;
+
+  // Check if the inverse mode is active
+  if (inverse) {
+    // Inverted transformations
+    bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(0.95)`;
+    antiHero.style.transform = `translate(${x * 80}px, ${y * 80}px)`;
+    hero.style.transform = `translate(${x * -120}px, ${y * -40}px)`;
+  } else {
+    // Normal transformations
+    bg.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
+    antiHero.style.transform = `translate(${x * -80}px, ${y * -80}px)`;
+    hero.style.transform = `translate(${x * 120}px, ${y * 40}px)`;
+  }
+});
+
+// You can toggle the inverse mode manually by setting the `inverse` variable to true or false
+// For example, toggle the inverse mode when a key is pressed (like the 'i' key)
+document.addEventListener("keydown", (e) => {
+  if (e.key === "i") {
+    // Press 'i' to toggle inverse mode
+    inverse = !inverse;
+  }
 });
 
 BAR_WIDTH = 0.2;

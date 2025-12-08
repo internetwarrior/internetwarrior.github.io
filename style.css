@@ -5,9 +5,35 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  --border-width: 5px;
+  --border-width: 6.5px;
   --border-radius: 2px;
   --animation-duration: 0.5s;
+
+  --animation-final-width: 3.8px;
+  --animation-final-color: greenyellow;
+  --primary-background-color: rgb(39, 67, 0);
+
+  --anti-hero-visibility: block;
+  --anti-hero-border-width: 5px;
+  --anti-hero-opacity: 0.8;
+  --anti-hero-hitbox: purple;
+}
+
+@keyframes borderDisappear {
+  0% {
+    border-top: none;
+    border-right: var(--border-width) solid rgba(255, 255, 255, 1); /* Right border */
+    border-bottom: var(--border-width) solid rgba(255, 255, 255, 1); /* Bottom border */
+    border-left: var(--border-width) solid rgba(255, 255, 255, 1); /* Left border */
+  }
+  100% {
+    border-top: none;
+    border-right: var(--animation-final-width) solid
+      var(--animation-final-color);
+    border-bottom: var(--animation-final-width) solid
+      var(--animation-final-color);
+    border-left: var(--animation-final-width) solid var(--animation-final-color);
+  }
 }
 
 @keyframes floating {
@@ -16,6 +42,18 @@
   }
   100% {
     transform: translateY(-100px);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-100px);
+  }
+  150% {
+    transform: translateY(0px);
   }
 }
 
@@ -29,7 +67,7 @@ html {
   position: fixed;
   inset: 0;
   overflow: hidden;
-  background-color: black;
+  background-color: var(--primary-background-color);
   /* z-index: -1; */
 }
 
@@ -55,6 +93,10 @@ footer {
   top: 120vh;
   left: calc(50% - 120px);
   scale: 0.3;
+  display: var(--anti-hero-visibility);
+  outline: var(--anti-hero-hitbox) var(--anti-hero-border-width) solid;
+  opacity: var(--anti-hero-opacity);
+
   /* scale: 0.39; */
   /* animation: floating 10s 100ms infinite ease-out alternate; */
   /* z-index: 9999; */
@@ -69,18 +111,6 @@ footer {
 
 #hero {
   /* background-color: aqua; */
-}
-
-@keyframes floating {
-  0% {
-    transform: translateY(0);
-  }
-  30% {
-    transform: translateY(-100px);
-  }
-  150% {
-    transform: translateY(0px);
-  }
 }
 
 canvas {
@@ -169,24 +199,10 @@ button {
   border-right: var(--border-width) solid rgba(255, 255, 255, 1); /* Right border */
   border-bottom: var(--border-width) solid rgba(255, 255, 255, 1); /* Bottom border */
   border-left: var(--border-width) solid rgba(255, 255, 255, 1); /* Left border */
-  padding-bottom: 50px; /* Example value for padding-bottom */
+  padding-bottom: 40px; /* Example value for padding-bottom */
+  padding-top: 6.5px;
   border-radius: var(--border-radius);
   /* Start the animation */
-}
-
-@keyframes borderDisappear {
-  0% {
-    border-top: none;
-    border-right: var(--border-width) solid rgba(255, 255, 255, 1); /* Right border */
-    border-bottom: var(--border-width) solid rgba(255, 255, 255, 1); /* Bottom border */
-    border-left: var(--border-width) solid rgba(255, 255, 255, 1); /* Left border */
-  }
-  100% {
-    border-top: none;
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
 }
 
 .model-small-text {
