@@ -5,18 +5,20 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  --border-width: 6.5px;
+  --border-width: 5px;
   --border-radius: 2px;
   --animation-duration: 0.5s;
 
-  --animation-final-width: 3.8px;
-  --animation-final-color: greenyellow;
-  --primary-background-color: rgb(39, 67, 0);
+  --animation-final-width: 1px;
+  --animation-final-color: transparent;
+  --primary-background-color: black;
+  --swear-padding-bottom: 30px;
+  --swear-padding-top: 0px; /* not a swear, a Curse */
 
   --anti-hero-visibility: block;
   --anti-hero-border-width: 5px;
   --anti-hero-opacity: 0.8;
-  --anti-hero-hitbox: purple;
+  --anti-hero-hitbox: transparent;
 }
 
 @keyframes borderDisappear {
@@ -59,8 +61,8 @@
 
 body,
 html {
-  height: 100%; /* Make sure body takes full height */
-  overflow: hidden; /* Prevent scrolling */
+  height: 100%;
+  overflow: hidden;
 }
 
 .bg-wrap {
@@ -68,7 +70,6 @@ html {
   inset: 0;
   overflow: hidden;
   background-color: var(--primary-background-color);
-  /* z-index: -1; */
 }
 
 footer {
@@ -96,21 +97,6 @@ footer {
   display: var(--anti-hero-visibility);
   outline: var(--anti-hero-hitbox) var(--anti-hero-border-width) solid;
   opacity: var(--anti-hero-opacity);
-
-  /* scale: 0.39; */
-  /* animation: floating 10s 100ms infinite ease-out alternate; */
-  /* z-index: 9999; */
-}
-
-.bg-wrap {
-}
-
-#anti-her0 {
-  /* background-color: aqua; */
-}
-
-#hero {
-  /* background-color: aqua; */
 }
 
 canvas {
@@ -140,8 +126,6 @@ button {
   cursor: pointer;
 }
 
-button {
-}
 #start {
   position: fixed;
   width: 100%;
@@ -184,7 +168,6 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* Optional: you can add other styles for size and appearance */
 }
 
 #answer {
@@ -195,18 +178,18 @@ button {
   z-index: 9999;
 }
 .model-text .swear {
-  border-top: none; /* Remove top border */
-  border-right: var(--border-width) solid rgba(255, 255, 255, 1); /* Right border */
-  border-bottom: var(--border-width) solid rgba(255, 255, 255, 1); /* Bottom border */
-  border-left: var(--border-width) solid rgba(255, 255, 255, 1); /* Left border */
-  padding-bottom: 40px; /* Example value for padding-bottom */
-  padding-top: 6.5px;
+  border-top: none;
+  border-right: var(--border-width) solid rgba(255, 255, 255, 1);
+  border-bottom: var(--border-width) solid rgba(255, 255, 255, 1);
+  border-left: var(--border-width) solid rgba(255, 255, 255, 1);
+  padding-bottom: var(--swear-padding-bottom);
+  padding-top: var(--swear-padding-top);
+  padding-top: 10px;
   border-radius: var(--border-radius);
-  /* Start the animation */
 }
 
 .model-small-text {
-  color: rgb(186, 186, 186);
+  color: rgb(132, 132, 132);
 }
 
 header {
@@ -215,7 +198,6 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  /* background-color: aqua; */
   z-index: 10;
   display: flex;
   flex-direction: row;
@@ -249,8 +231,6 @@ header a {
 #hero {
   scale: 1.1;
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
-
-  /* z-index: 10; */
 }
 
 @keyframes floating-2 {

@@ -1,15 +1,35 @@
-let VOLUME = 0.2;
-VOLUME = 0.5;
-let defaultSpeed = 30;
-let speed = defaultSpeed;
-let inverse = true;
+const VOLUME = 0.2; // 0.2 is defualt
+const speed = 30; //30 is default
+//const startDelay = 3; for the future!
+const inverse = false;
 
-let debug = false;
-speed = 20;
+let WORD_STORAGE = [
+  "Туда их!",
+  "-Ты что!?",
+  "-Не ахуел?",
+  "за что?",
+  "-Хватит тыкать!",
+  "Ахилес, сын Пелея XD",
+  "-Успокойся",
+  "я не знаю",
+  "-Ты упорный!",
+  "алё...",
+  "Иди сюда!",
+  "Упс...",
+  "Woops...",
+  "-Уффффф.....",
+  "Anger!",
+  "Hello, world!",
+  "Au revoir.",
+  "пошла на хуй!",
+  "Ехехехехехе",
+  "-Я тебе уже сказала... ",
+  "-Я знаю!",
+];
 
-if (debug) {
-  VOLUME = 0.0;
-}
+const songs = ["song-1.m4a", "song-2.m4a", "song-3.m4a", "final-song.m4a"];
+
+let song_name = songs[3];
 
 const COLOR_OBJ = {
   color_1: 250,
@@ -17,10 +37,12 @@ const COLOR_OBJ = {
   color_3: 250,
 };
 
-const songs = ["song-1.m4a", "song-2.m4a", "song-3.m4a"];
-
-let song_name = songs[2];
-
+document.addEventListener("keydown", (e) => {
+  if (e.key === "i") {
+    // Press 'i' to toggle inverse mode
+    inverse = !inverse;
+  }
+});
 function exitFullScreenOnEscape(event) {
   if (event.key === "Escape") {
     // Check if the document is currently in full-screen mode
@@ -45,73 +67,12 @@ function exitFullScreenOnEscape(event) {
 // Add an event listener for the 'keydown' event on the document
 document.addEventListener("keydown", exitFullScreenOnEscape);
 
-let WORD_STORAGE = [
-  "Туда их!",
-  "-Ты что!?",
-  "-Не ахуел?",
-  "за что?",
-  "-Хватит тыкать!",
-  "-Успокойся",
-  "я не знаю",
-  "-Ты упорный!",
-  "алё...",
-  "Иди сюда!",
-  "Упс...",
-  "Woops...",
-  "-Уффффф.....",
-  "Anger!",
-  "Hello, world!",
-  "CI PASTI!",
-  "пошла на хуй!",
-  "Ехехехехехе",
-  "-Не выводи меня из себя!",
-  "-Я тебе уже сказала... ",
-  "-Я знаю!",
-  // "Ля, Ты тупая!",
-  // "Ты просто дура!",
-  // "Ты просто дура!",
-  // "#ФактыПримиXD",
-  // "-Это любовь)  <3 ",
-];
-
-WORD_STORAGE = [
-  "#THINK",
-  "#WORK",
-  "#UPGRADE",
-  "#NOTCH",
-  "#LOOSE",
-  "#SAME_AGAIN",
-  "#GET_BACK",
-  "#KNOWLEDGE",
-  // "#LOOKING_FOR_THE_JACKPOT?",
-  "#ТЫ_КТО_ТАКОЙ!?",
-  "#KNOWLEDGE_LIMITS",
-  "#BE_CAREFUL",
-  "#IMPROVE",
-  "#JUST_MAKE_IT_DONE",
-  "#CRITICAL_THINKING",
-  "#TACTICAL_RETREAT_777",
-  "#ACTIVISION",
-  "#BE_AFRAID",
-  "#DON'T_MISTAKE",
-  // "#WASTE",
-  "#EARN_BACK",
-  // "#STABILIZE",
-  "#PERFECT",
-  "#UNPERFECT",
-  "#THINK_FAST",
-  "#GIVE_UP",
-  "#ЗДРАВСТВУЙ!",
-  "#НАТИСК?",
-  // "#KEEP_THE_BALANCE!",
-];
-
 const bg = document.getElementById("background");
 const hero = document.getElementById("hero");
 const antiHero = document.getElementById("anti-hero");
 
 function settingsButton() {
-  alert("DEBUG-SETTINGS-BUTTON");
+  alert("Soon! SETTINGS-BUTTON: version:(0.5.7.2)");
 }
 
 document.addEventListener("mousemove", (e) => {
@@ -129,15 +90,6 @@ document.addEventListener("mousemove", (e) => {
     bg.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
     antiHero.style.transform = `translate(${x * -80}px, ${y * -80}px)`;
     hero.style.transform = `translate(${x * 120}px, ${y * 40}px)`;
-  }
-});
-
-// You can toggle the inverse mode manually by setting the `inverse` variable to true or false
-// For example, toggle the inverse mode when a key is pressed (like the 'i' key)
-document.addEventListener("keydown", (e) => {
-  if (e.key === "i") {
-    // Press 'i' to toggle inverse mode
-    inverse = !inverse;
   }
 });
 
@@ -159,7 +111,7 @@ function processArrayBuffer(arrayBuffer) {
 
 function moveToTop() {
   const element = document.getElementById("anti-hero");
-  element.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
+  element.style.transition = "top 3s  ease-in-out"; // Ensure smooth transition
   element.style.top = "0"; // Move the element to the top
 }
 
