@@ -325,3 +325,25 @@ window.onload = function () {
   }
   setInterval(draw, 33);
 };
+
+let start = Date.now();
+let stayedLongEnough = false;
+const intervalCheck = 10_000;
+
+// check every 30 sec and save time spent
+setInterval(() => {
+  const spent = Math.floor((Date.now() - start) / 1000);
+  console.log(spent);
+  if (spent >= 1) stayedLongEnough = true;
+}, intervalCheck);
+
+document.getElementById("ytBtn").onclick = () => {
+  if (!stayedLongEnough) {
+    alert("Откроется через 1 минуту.");
+    return;
+  }
+  window.open(
+    "https://youtu.be/RlBKwHzZscA?si=rD__s-7BEuXBsj8o&t=143",
+    "_blank"
+  );
+};
