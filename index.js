@@ -18,20 +18,34 @@ const COLOR_OBJ = {
   color_3: 250, // Blue
 };
 
+IS_FIRST_CLICK = true;
+
 // Function to apply the background color from COLOR_OBJ
 function applyBackgroundColor() {
   const rgbColor = `rgb(${COLOR_OBJ.color_1}, ${COLOR_OBJ.color_2}, ${COLOR_OBJ.color_3})`;
   document.body.style.backgroundColor = rgbColor;
 }
 
-const heroElement = document.querySelector(".snow");
-
+const heroElement = document.querySelector("body");
 if (heroElement) {
+  // Listen for left-click (normal click)
   heroElement.addEventListener("click", function () {
-    // Change the background color to a random color
-    console.log("hello");
-    // Example: Change background color to random color
-    heroElement.style.backgroundColor = getRandomColor();
+    if (IS_FIRST_CLICK) {
+      IS_FIRST_CLICK = false;
+      return;
+    } else {
+      console.log("Left-clicked");
+      heroElement.style.backgroundColor = getRandomColor();
+    }
+  });
+
+  // Listen for right-click (context menu)
+  heroElement.addEventListener("contextmenu", function (event) {
+    event.preventDefault(); // Prevent the default right-click menu from appearing
+    const canvasElement = document.querySelector("#canvas");
+    console.log("Right-clicked");
+    canvasElement.classList.toggle("flip-y");
+    // heroElement.style.backgroundColor = getRandomColor();
   });
 }
 
@@ -40,7 +54,7 @@ function getRandomColor() {
   COLOR_OBJ.color_1 = Math.floor(Math.random() * 256); // Random number between 0 and 255
   COLOR_OBJ.color_2 = Math.floor(Math.random() * 256); // Random number between 0 and 255
   COLOR_OBJ.color_3 = Math.floor(Math.random() * 256); // Random number between 0 and 255
-  return `rgb(${r}, ${g}, ${b})`;
+  // return `rgb(${r}, ${g}, ${b})`;
 }
 
 // // Function to change the color to red after 20 seconds

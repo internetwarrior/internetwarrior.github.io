@@ -19,6 +19,18 @@
   --anti-hero-border-width: 5px;
   --anti-hero-opacity: 0.8;
   --anti-hero-hitbox: transparent;
+  user-select: none !important;
+}
+
+.snow,
+#hero,
+#buildings img,
+#background {
+  pointer-events: none !important;
+}
+
+.flip-y {
+  transform: scaleY(-1);
 }
 
 @keyframes borderDisappear {
