@@ -39,7 +39,7 @@ IS_FIRST_CLICK = true;
 const songs = [
   "Smash Mouth - All Star.mp3",
   "MrMoMMusic - Phao  2 Phut Hon KAIZ Remix  Animatio.mp3",
-  "_Татьяна_Куртукова_Одного_сл_и_муз_Птр_Андреев.mp3",
+  "Odnogo Tatyana Kurtukova.mp3",
   "EMIN - Kamin Lyric Video.mp3",
 ];
 
