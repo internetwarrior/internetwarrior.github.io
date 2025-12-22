@@ -4,7 +4,7 @@ const VOLUME = 1.0; // 0.2 is defualt ->0.5
 const backgroudVolume = VOLUME - 0.8;
 let speed = 50; //30 is default
 const develoerMode = {
-  debug: false,
+  debug: true,
   mode: false,
   inverse: false,
   devmodeEnterCount: 0,
@@ -19,7 +19,7 @@ if (develoerMode.debug) {
 const inverse = false;
 let inverseMouseButtons = develoerMode.inverse;
 
-const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=HLQ1cK9Edhc";
+const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=uY9-lpXsYTs";
 
 BAR_WIDTH = 0.2;
 
@@ -37,10 +37,12 @@ let fadeDuration = 2; // Duration for the fade in seconds (smoothness of volume 
 IS_FIRST_CLICK = true;
 
 const songs = [
+  "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
   "Smash Mouth - All Star.mp3",
   "MrMoMMusic - Phao  2 Phut Hon KAIZ Remix  Animatio.mp3",
   "Odnogo Tatyana Kurtukova.mp3",
   "EMIN - Kamin Lyric Video.mp3",
+  "Natali - O Bozhe Kakoj Muzhchina.mp3",
 ];
 
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
@@ -256,9 +258,9 @@ function moveToTop() {
   const element = document.getElementById("anti-hero");
   const buildings = document.getElementById("buildings");
   buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
-  element.style.transition = "top 3s  ease-in-out"; // Ensure smooth transition
+  element.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
   if (song_name !== songs[3]) {
-    element.style.top = "100%"; // Move the element to the top
+    element.style.top = "-100%"; // Move the element to the top
     buildings.style.bottom = "0%"; // Move the element to the top
   } else {
     WORD_STORAGE = wish_to_say_and_get;
