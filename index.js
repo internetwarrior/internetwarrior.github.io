@@ -65,6 +65,8 @@ let WORD_STORAGE = [
   daysLeftTill2026(),
 ];
 
+WORD_STORAGE = [undefined, NaN, "error", daysLeftTill2026((state = true))];
+
 // Imported elements
 const heroElement = document.querySelector("body");
 
@@ -165,11 +167,14 @@ function getRandomContent() {
   return THE_QUESTION_MARK_LINK;
 }
 
-function daysLeftTill2026() {
+function daysLeftTill2026(state = false) {
   const now = new Date();
   const newYear = new Date("2026-01-01T00:00:00");
   const diff = newYear - now;
   const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  if (state) {
+    return `Осталось ${days} дней до НГ!`;
+  }
   return `Осталось ${days} дней до НГ 🥳`;
 }
 
