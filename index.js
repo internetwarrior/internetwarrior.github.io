@@ -4,7 +4,9 @@ const VOLUME = 1.0; // 0.2 is defualt ->0.5
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default
 
-let noChangeColor = true;
+let noChangeColor = false;
+
+let snowSpeed = 20;
 
 const develoerMode = {
   debug: true,
@@ -86,6 +88,114 @@ const bg = document.getElementById("background");
 const hero = document.getElementById("hero");
 const antiHero = document.getElementById("anti-hero");
 const building = document.getElementById("buildings");
+
+const lyrics = document.getElementById("lyrics");
+
+// Letter settings
+
+let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+letters = "eSpuHoPerSoeHPruPeSHeoPrHe";
+
+let interval = 1;
+
+// lyrics-settings
+let lastScrollY = 0;
+
+// lyrics.addEventListener("wheel", (e) => {
+//   e.preventDefault();
+//   // Reduce scroll by 50%
+//   lyrics.scrollTop += e.deltaY * 0.4;
+// });
+
+//lyrics-functions
+
+function preToList(preElement) {
+  const ul = document.createElement("ul");
+  ul.style.listStyle = "none";
+  ul.style.padding = "0";
+  ul.style.margin = "0";
+
+  preElement.innerText
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .forEach((line) => {
+      const li = document.createElement("li");
+      li.textContent = line;
+      ul.appendChild(li);
+    });
+
+  preElement.replaceWith(ul);
+  return ul;
+}
+
+const pre = lyrics.querySelector("pre");
+const ul = preToList(pre);
+
+const items = [...ul.querySelectorAll("li")];
+let index = -1;
+
+// lyrics.addEventListener("mousedown", (e) => {
+//   if (e.button !== 0) return;
+
+//   if (index >= 0) {
+//     items[index].style.background = "";
+//     items[index].style.color = "";
+//   }
+
+//   index = (index + 1) % items.length;
+//   const current = items[index];
+
+//   current.style.background = "white";
+
+//   current.style.color = "black";
+
+//   current.scrollIntoView({
+//     behavior: "smooth",
+//     block: "start",
+//   });
+// });
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" && !e.shiftKey) {
+    e.preventDefault();
+
+    if (index >= 0) {
+      items[index].style.background = "";
+      items[index].style.color = "";
+    }
+
+    index = (index + 1) % items.length;
+    const current = items[index];
+
+    current.style.background = "white";
+    current.style.color = "black";
+
+    current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  if (e.code === "Space" && e.shiftKey) {
+    e.preventDefault();
+
+    if (index >= 0) {
+      items[index].style.background = "";
+      items[index].style.color = "";
+    }
+
+    index = (index - 1 + items.length) % items.length;
+    const current = items[index];
+
+    current.style.background = "white";
+    current.style.color = "black";
+
+    current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+});
 
 //keydowns
 
@@ -225,8 +335,8 @@ document.addEventListener("mousemove", (e) => {
   const y = e.clientY / window.innerHeight - 0.5;
 
   // Get the 'building' element
-
   // Check if the inverse mode is active
+  //hero-settings
   if (inverse) {
     // Inverted transformations
     bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(0.95)`;
@@ -235,9 +345,8 @@ document.addEventListener("mousemove", (e) => {
     building.style.transform = `translate(${x * -50}px, ${y * -50}px)`; // Parallax for building
   } else {
     // Normal transformations
-    bg.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
-    antiHero.style.transform = `translate(${x * -120}px, ${y * -80}px)`;
-    // hero.style.transform = `translate(${x * 120}px, ${y * 40}px)`;
+    bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
+    antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
     hero.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
     building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
   }
@@ -277,19 +386,31 @@ function processArrayBuffer(arrayBuffer) {
   window.addEventListener("focus", restoreVolume); // When window gains focus, restore volume
 }
 
+// on-start-fucntion
+
 function moveToTop() {
-  const element = document.getElementById("anti-hero");
   const buildings = document.getElementById("buildings");
   buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
-  element.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
+  antiHero.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
+  lyrics.style.opacity = "1";
   if (song_name !== songs[3]) {
-    element.style.top = "-5%"; // Move the element to the top
+    antiHero.style.top = "-5%"; // Move the element to the top
     buildings.style.bottom = "0%"; // Move the element to the top
   } else {
     WORD_STORAGE = wish_to_say_and_get;
     speed = 100;
   } // Ensure smooth transition
 }
+const checkbox = document.querySelector(".anti-hero-checkbox input");
+
+checkbox.addEventListener("change", () => {
+  antiHero.style.animation = checkbox.checked
+    ? "floating-2 4000ms infinite ease alternate"
+    : "none";
+  hero.style.animation = checkbox.checked
+    ? "animation: floating-2 10000ms 100ms infinite ease-in-out alternate;"
+    : "none";
+});
 
 async function loadDefaultAudio() {
   hero.style.animation = "none";
@@ -304,7 +425,9 @@ async function loadDefaultAudio() {
   backgroundElement.style.filter =
     " hue-rotate(240deg) saturate(150%) brightness(105%)";
   backgroundElement.style.opacity = "0.5";
-  heroElement.style.opacity = "1";
+  // heroElement.style.opacity = "1";
+  // heroElement.classList.add("hero-down");
+
   heroElement.style.filter =
     " hue-rotate(240deg) saturate(150%) brightness(105%)";
   swear.style.animation =
@@ -386,10 +509,6 @@ function visualize(audioBuffer, audioContext, gainNode) {
 }
 
 // Swear function
-
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-let interval = 1;
 
 const el = document.querySelector(".swear");
 el.addEventListener("mouseover", (event) => {
@@ -512,7 +631,7 @@ window.onload = function () {
   }
 
   // Start the animation loop
-  setInterval(draw, 10); // Redraw every 33ms
+  setInterval(draw, snowSpeed); // Redraw every 33ms
 };
 
 let start = Date.now();
