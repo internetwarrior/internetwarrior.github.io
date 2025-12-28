@@ -112,3 +112,46 @@ const ul = preToList(pre);
 
 const items = [...ul.querySelectorAll("li")];
 let index = -1;
+
+document.addEventListener("keydown", (e) => {
+  // debugger;
+  if (e.code === "Space" && !e.shiftKey) {
+    e.preventDefault();
+
+    if (index >= 0) {
+      items[index].style.background = "";
+      items[index].style.color = "";
+    }
+
+    index = (index + 1) % items.length;
+    const current = items[index];
+
+    current.style.background = "white";
+    current.style.color = "black";
+
+    current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+
+  if (e.code === "Space" && e.shiftKey) {
+    e.preventDefault();
+
+    if (index >= 0) {
+      items[index].style.background = "";
+      items[index].style.color = "";
+    }
+
+    index = (index - 1 + items.length) % items.length;
+    const current = items[index];
+
+    current.style.background = "white";
+    current.style.color = "black";
+
+    current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+});

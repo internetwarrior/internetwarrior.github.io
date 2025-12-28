@@ -193,48 +193,6 @@ let lastScrollY = 0;
 //     block: "start",
 //   });
 // });
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" && !e.shiftKey) {
-    e.preventDefault();
-
-    if (index >= 0) {
-      items[index].style.background = "";
-      items[index].style.color = "";
-    }
-
-    index = (index + 1) % items.length;
-    const current = items[index];
-
-    current.style.background = "white";
-    current.style.color = "black";
-
-    current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-
-  if (e.code === "Space" && e.shiftKey) {
-    e.preventDefault();
-
-    if (index >= 0) {
-      items[index].style.background = "";
-      items[index].style.color = "";
-    }
-
-    index = (index - 1 + items.length) % items.length;
-    const current = items[index];
-
-    current.style.background = "white";
-    current.style.color = "black";
-
-    current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-});
-
 //keydowns
 
 document.addEventListener("keydown", (e) => {
