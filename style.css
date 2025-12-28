@@ -380,3 +380,14 @@ header a {
   margin-left: 70px;
   /* transform: scaleX(-1.1); */
 }
+
+#the-warrior a {
+  text-decoration: underline;
+  color: white !important;
+  transition: all 300ms ease-in-out;
+}
+
+#the-warrior:hover a {
+  /* text-transform: capitalize; */
+  color: purple !important;
+}
