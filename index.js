@@ -1,11 +1,44 @@
 // The Rome wasn't built in a single day
 
-const VOLUME = 1.0; // 0.2 is defualt ->0.5
+const VERSION = "(0.7.1.0)";
+const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default
 
+document.querySelector("#canvas").classList.toggle("flip-y");
+
+const hints = [
+  "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
+  "Не забудь f11 для вайба",
+];
+
 let noChangeColor = false;
 
+//hint-function
+
+document.querySelector(".hint").innerText =
+  hints[Math.floor(Math.random() * hints.length)];
+
+let theLastHint = null; // Initialize a variable to store the last hint
+const HINT_TIMER_TIME = 3_000; // default 5000->3000
+
+setInterval(() => {
+  let theRandomHint = Math.floor(Math.random() * hints.length);
+  let theHintElement = document.querySelector(".hint");
+
+  // If the new hint is the same as the last one, skip updating
+  if (theLastHint === theRandomHint) {
+    theHintElement.innerText = "Loading...";
+    theLastHint = null;
+    console.log("while loading:", theRandomHint);
+  } else {
+    // hintChangeTime = 5000;
+    theHintElement.innerText = hints[theRandomHint]; // Display the new hint
+    theLastHint = theRandomHint; // Update the last hint to the current one
+  }
+}, HINT_TIMER_TIME);
+
+//snow-settings
 let snowSpeed = 20;
 
 const develoerMode = {
@@ -19,6 +52,38 @@ const develoerMode = {
 if (develoerMode.debug) {
   develoerMode.develoerModeEnter = 0;
 }
+
+// object-classes -> for the future
+class Story {
+  constructor(song, songVolume, inverse, hero, antiHero) {
+    this.song = song;
+    this.songVolume = songVolume;
+    this.inverse = inverse;
+    this.hero = hero;
+    this.antiHero = antiHero;
+  }
+}
+
+class Hero {
+  constructor(speedX, speedY, img) {
+    this.heroSpeedX = speedX;
+    this.heroSpeedY = speedY;
+    this.img = img;
+  }
+}
+
+class AntiHero extends Hero {}
+
+const hero1 = new Hero("40px", "40px", "https://img.com/img_1");
+const antiHero1 = new AntiHero("40px", "40px", "https://img.com/img_2");
+
+const story = new Story(
+  "Kendrick Lamar & SZA - All the Stars.mp3",
+  0.2,
+  false,
+  hero1,
+  antiHero1
+);
 
 //const startDelay = 3; for the future!
 const inverse = false;
@@ -52,6 +117,7 @@ const songs = [
   "Natali - O Bozhe Kakoj Muzhchina.mp3",
 ];
 
+// let song_name = story.song;
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 
 const wish_to_say_and_get = [
@@ -89,8 +155,6 @@ const hero = document.getElementById("hero");
 const antiHero = document.getElementById("anti-hero");
 const building = document.getElementById("buildings");
 
-const lyrics = document.getElementById("lyrics");
-
 // Letter settings
 
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -108,32 +172,6 @@ let lastScrollY = 0;
 // });
 
 //lyrics-functions
-
-function preToList(preElement) {
-  const ul = document.createElement("ul");
-  ul.style.listStyle = "none";
-  ul.style.padding = "0";
-  ul.style.margin = "0";
-
-  preElement.innerText
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean)
-    .forEach((line) => {
-      const li = document.createElement("li");
-      li.textContent = line;
-      ul.appendChild(li);
-    });
-
-  preElement.replaceWith(ul);
-  return ul;
-}
-
-const pre = lyrics.querySelector("pre");
-const ul = preToList(pre);
-
-const items = [...ul.querySelectorAll("li")];
-let index = -1;
 
 // lyrics.addEventListener("mousedown", (e) => {
 //   if (e.button !== 0) return;
@@ -651,3 +689,6 @@ document.getElementById("ytBtn").onclick = () => {
   // }
   window.open(getRandomContent(), "_blank");
 };
+document.querySelectorAll(".version").forEach((el) => {
+  el.innerText = VERSION;
+});

@@ -319,7 +319,8 @@ button {
 }
 
 .model-small-text {
-  color: rgb(132, 132, 132);
+  color: rgb(132, 132, 132) !important;
+  text-align: center;
 }
 
 header {
