@@ -1,6 +1,6 @@
 // The Rome wasn't built in a single day
 
-const VERSION = "(0.7.1.1)";
+const VERSION = "(0.7.1.2)";
 const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default

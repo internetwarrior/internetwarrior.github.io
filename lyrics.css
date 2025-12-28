@@ -11,3 +11,16 @@
   padding: 2px 6px;
   border-radius: 1px;
 }
+.melody-highlight::before {
+  content: " ♪ "; /* Melody symbol before text */
+}
+
+.melody-highlight::after {
+  content: " ♪ "; /* Melody symbol after text */
+}
+
+/* Optional: Style the highlighted item */
+.melody-highlight {
+  background: white;
+  color: black;
+}
