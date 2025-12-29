@@ -1,5 +1,5 @@
 // The Rome wasn't built in a single day
-const VERSION = "(0.7.2.1)";
+const VERSION = "(0.7.2.2)";
 
 const heroElement = document.querySelector("body");
 const bg = document.getElementById("background");
