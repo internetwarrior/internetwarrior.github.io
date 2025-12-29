@@ -23,8 +23,8 @@
 }
 
 .hidden {
-  display: none;
-  opacity: 0;
+  display: none !important;
+  opacity: 0 !important;
 }
 
 @keyframes heroDown {
@@ -49,7 +49,7 @@
 }
 
 .snow,
-#hero,
+buildings #hero,
 #buildings img,
 #background {
   pointer-events: none !important;
@@ -145,14 +145,14 @@ footer {
 }
 #buildings {
   display: none;
-  opacity: 0;
+  /* opacity: 0; */
   position: fixed;
   z-index: 1;
   bottom: -100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  scale: 1;
+  /* scale: 0.9; */
   /* filter: blur(0.9px); Adjust the pixel value for more or less blur */
 }
 #buildings img {
@@ -363,7 +363,7 @@ header a {
 #hero {
   scale: 1.1;
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
-  left: -80px;
+  left: -40px;
 }
 
 @keyframes floating-2 {
@@ -391,4 +391,33 @@ header a {
 #the-warrior:hover a {
   /* text-transform: capitalize; */
   color: purple !important;
+}
+
+/* settings */
+
+#settings {
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding: 40px;
+}
+
+#settings h3 {
+  color: white;
+}
+
+#settings ul {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  flex-direction: row;
+  gap: 20px;
+  padding-top: 20px;
 }

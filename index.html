@@ -15,15 +15,9 @@
   <body>
     <header>
       <nav>
-        <form>
-          <label class="anti-hero-checkbox">
-            <input type="checkbox" value="true" />
-            Анимация
-          </label>
-        </form>
-        <button id="settingsBtn" onclick="settingsButton()">
+        <!-- <button id="settingsBtn" onclick="settingsButton()">
           <img src="./assets/svg/settings_svg.svg" alt="" />
-        </button>
+        </button> -->
 
         <button id="ytBtn">
           <img src="./assets/svg/question_mark_svg.svg" alt="" />
@@ -34,6 +28,20 @@
         >
       </nav>
     </header>
+    <div id="settings">
+      <h3>Настройки</h3>
+      <ul>
+        <li>
+          <form>
+            <label class="anti-hero-checkbox">
+              <input type="checkbox" value="true" />
+              Анимация
+            </label>
+          </form>
+        </li>
+      </ul>
+    </div>
+
     <div class="bg-wrap">
       <div id="buildings">
         <img src="./assets/png/the-woman.png" class="new-female-hero" />
@@ -64,38 +72,7 @@
             <span class="hint"> </span>
           </small>
         </div>
-
-        <small>
-          <br />
-          <span style="font-size: 16px !important">
-            <b> Что нового <span class="version"></span>?</b></span
-          >
-          <br />
-          <br />
-          - Lyrics <- оно же текст песни
-          <br />
-          • Space button <- Следующая линия
-          <br />
-          • Shift + Space <- undo, назад
-          <br />
-          <br />
-
-          - Анимация анти-героев или же друженблюных персонажей
-          <br />
-          - Новый герой Воин Судьбы(Он же Супермэн).
-          <br />
-          - Кнопка <span style="text-decoration: underline"> <b>ВОИН</b></span
-          >.
-          <br />
-          - Hint <- Подсказки стали динамичными 👍
-          <br />
-
-          <br />
-          <br />
-
-          <!-- От автора:<br />
-          -  -->
-        </small>
+        <div id="news"></div>
 
         <br />
       </div>
@@ -111,7 +88,7 @@
       <h3 class="model-text">
         Совершенный, новый апгрейд
 
-        <p class="swear" id="swear">S <- символ надежды.</p>
+        <p class="swear" id="swear"></p>
       </h3>
     </div>
     <div id="lyrics"></div>
@@ -120,5 +97,6 @@
 
     <script src="lyrics.js"></script>
     <script src="index.js"></script>
+    <script src="news.js"></script>
   </body>
 </html>

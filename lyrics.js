@@ -1,6 +1,14 @@
 //The Rome wasn't built in a single day!
 const lyrics = document.getElementById("lyrics");
 
+const isLyricsNeeded = false;
+
+// lyrics-settings
+
+if (!isLyricsNeeded) {
+  lyrics.classList.add("hidden");
+}
+
 const MELODY_SYMBOL = " ♪ ";
 
 let songLyrics = `

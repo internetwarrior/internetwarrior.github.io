@@ -1,42 +1,42 @@
 // The Rome wasn't built in a single day
+const VERSION = "(0.7.2.1)";
 
-const VERSION = "(0.7.1.2)";
+const heroElement = document.querySelector("body");
+const bg = document.getElementById("background");
+const hero = document.getElementById("hero");
+const antiHero = document.getElementById("anti-hero");
+const building = document.getElementById("buildings");
+
+const model = document.getElementById("model");
+const swear = document.getElementById("swear");
+const backgroundElement = document.getElementById("background");
+
+//Settings
 const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default
+let isCanvasFlipped = false;
 
-document.querySelector("#canvas").classList.toggle("flip-y");
+const swearWords = "а, ты кто!?";
+
+const UNHOVER_TEXT = "упс...";
+let originalVolume = VOLUME;
+let fadeDuration = 2;
+
+// Temporary conditions
+
+antiHero.classList.add("hidden");
+swear.innerText = swearWords;
+
+const THE_QUESTION_MARK_LINK =
+  "https://www.letras.com/kendrick-lamar/all-the-stars/";
 
 const hints = [
   "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
   "Не забудь f11 для вайба",
 ];
 
-let noChangeColor = false;
-
-//hint-function
-
-document.querySelector(".hint").innerText =
-  hints[Math.floor(Math.random() * hints.length)];
-
-let theLastHint = null; // Initialize a variable to store the last hint
-const HINT_TIMER_TIME = 3_000; // default 5000->3000
-
-setInterval(() => {
-  let theRandomHint = Math.floor(Math.random() * hints.length);
-  let theHintElement = document.querySelector(".hint");
-
-  // If the new hint is the same as the last one, skip updating
-  if (theLastHint === theRandomHint) {
-    theHintElement.innerText = "Loading...";
-    theLastHint = null;
-    console.log("while loading:", theRandomHint);
-  } else {
-    // hintChangeTime = 5000;
-    theHintElement.innerText = hints[theRandomHint]; // Display the new hint
-    theLastHint = theRandomHint; // Update the last hint to the current one
-  }
-}, HINT_TIMER_TIME);
+let noChangeColor = true;
 
 //snow-settings
 let snowSpeed = 20;
@@ -53,44 +53,9 @@ if (develoerMode.debug) {
   develoerMode.develoerModeEnter = 0;
 }
 
-// object-classes -> for the future
-class Story {
-  constructor(song, songVolume, inverse, hero, antiHero) {
-    this.song = song;
-    this.songVolume = songVolume;
-    this.inverse = inverse;
-    this.hero = hero;
-    this.antiHero = antiHero;
-  }
-}
-
-class Hero {
-  constructor(speedX, speedY, img) {
-    this.heroSpeedX = speedX;
-    this.heroSpeedY = speedY;
-    this.img = img;
-  }
-}
-
-class AntiHero extends Hero {}
-
-const hero1 = new Hero("40px", "40px", "https://img.com/img_1");
-const antiHero1 = new AntiHero("40px", "40px", "https://img.com/img_2");
-
-const story = new Story(
-  "Kendrick Lamar & SZA - All the Stars.mp3",
-  0.2,
-  false,
-  hero1,
-  antiHero1
-);
-
 //const startDelay = 3; for the future!
 const inverse = false;
 let inverseMouseButtons = develoerMode.inverse;
-
-const THE_QUESTION_MARK_LINK =
-  "https://www.letras.com/kendrick-lamar/all-the-stars/";
 
 BAR_WIDTH = 0.2;
 
@@ -100,10 +65,6 @@ const COLOR_OBJ = {
   color_2: 250, // Green
   color_3: 250, // Blue
 };
-
-const UNHOVER_TEXT = "упс...";
-let originalVolume = VOLUME; // Store the initial volume
-let fadeDuration = 2; // Duration for the fade in seconds (smoothness of volume change)
 
 IS_FIRST_CLICK = true;
 
@@ -119,109 +80,47 @@ const songs = [
 
 // let song_name = story.song;
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
+song_name = songs[1];
 
-const wish_to_say_and_get = [
-  "Привет...",
-  "Как дела?",
-  "Как твои родители?",
-  "-Привет",
-  "-Хорошо, спасибо.",
-  // "Пошла на хуй!",
-  "-Прости за все боли 😕",
-];
-
-let WORD_STORAGE = [
-  "-Привет",
-  "Как делишки?",
-  "-А, меня зовут... 😊",
-  "#You-Dirty-Bustered!😆",
-  daysLeftTill2026(),
-];
-
-WORD_STORAGE = ["the S-Shield is", 'symbol for "hope"'];
-// WORD_STORAGE = [
-//   undefined,
-//   NaN,
-//   "error",
-//   daysLeftTill2026((state = true)),
-//   "777",
-// ];
+let WORD_STORAGE = [daysLeftTill2026()];
 
 // Imported elements
-const heroElement = document.querySelector("body");
-
-const bg = document.getElementById("background");
-const hero = document.getElementById("hero");
-const antiHero = document.getElementById("anti-hero");
-const building = document.getElementById("buildings");
 
 // Letter settings
 
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-letters = "eSpuHoPerSoeHPruPeSHeoPrHe";
 
 let interval = 1;
 
-// lyrics-settings
-let lastScrollY = 0;
+// Conditions for native elements
 
-// lyrics.addEventListener("wheel", (e) => {
-//   e.preventDefault();
-//   // Reduce scroll by 50%
-//   lyrics.scrollTop += e.deltaY * 0.4;
-// });
+if (isCanvasFlipped) {
+  document.querySelector("#canvas").classList.toggle("flip-y");
+}
 
-//lyrics-functions
+//hint-function
 
-// lyrics.addEventListener("mousedown", (e) => {
-//   if (e.button !== 0) return;
+document.querySelector(".hint").innerText =
+  hints[Math.floor(Math.random() * hints.length)];
 
-//   if (index >= 0) {
-//     items[index].style.background = "";
-//     items[index].style.color = "";
-//   }
+let theLastHint = null;
+const HINT_TIMER_TIME = 3_000;
 
-//   index = (index + 1) % items.length;
-//   const current = items[index];
+setInterval(() => {
+  let theRandomHint = Math.floor(Math.random() * hints.length);
+  let theHintElement = document.querySelector(".hint");
 
-//   current.style.background = "white";
-
-//   current.style.color = "black";
-
-//   current.scrollIntoView({
-//     behavior: "smooth",
-//     block: "start",
-//   });
-// });
-//keydowns
-
-document.addEventListener("keydown", (e) => {
-  const key = Number(e.key);
-  if (key >= 1 && key <= songs.length) {
-    if (develoerMode.devmodeEnterCount >= develoerMode.develoerModeEnter) {
-      song_name = songs[key - 1];
-      console.log("Selected:", song_name);
-      develoerMode.inverse = true;
-      develoerMode.mode = true;
-      alert(
-        "Alert! Developer mode is activated! <- Try not over use it! Song changed to:" +
-          song_name
-      );
-    }
-    if (develoerMode.devmodeEnterCount == develoerMode.develoerModeEnter - 3) {
-      alert(`После дополнительных 3-попыток, у вас будет developer-mode.`);
-      develoerMode.devmodeEnterCount += 1;
-    } else {
-      develoerMode.devmodeEnterCount += 1;
-      console.warn(
-        "DEVELOPER-MODE-IS-BEING-ACTIVATED! Attempt: " +
-          develoerMode.devmodeEnterCount +
-          "/" +
-          develoerMode.develoerModeEnter
-      );
-    }
+  if (theLastHint === theRandomHint) {
+    theHintElement.innerText = "Loading...";
+    theLastHint = null;
+    console.log("while loading:", theRandomHint);
+  } else {
+    theHintElement.innerText = hints[theRandomHint];
+    theLastHint = theRandomHint;
   }
-}); // <- Developer mode! Try don't over use it mother-father!
+}, HINT_TIMER_TIME);
+
+//keydowns
 
 document.addEventListener("keydown", (e) => {
   if (e.key === "i") {
@@ -299,7 +198,7 @@ function daysLeftTill2026(state = false) {
   if (state) {
     return `Осталось ${days} дней до НГ!`;
   }
-  return `Осталось ${days} дней до НГ 🥳`;
+  return `Осталось ${days} дня до НГ `; //🥳;
 }
 
 function exitFullScreenOnEscape(event) {
@@ -412,9 +311,7 @@ async function loadDefaultAudio() {
   hero.style.animation = "none";
   if (IS_PLAYING) return;
   moveToTop();
-  const model = document.getElementById("model");
-  const swear = document.getElementById("swear");
-  const backgroundElement = document.getElementById("background");
+
   const heroElement = document.getElementById("hero");
   model.style.opacity = "1";
 
@@ -634,17 +531,7 @@ let start = Date.now();
 let stayedLongEnough = false;
 const intervalCheck = 10_000;
 
-// // check every 30 sec and save time spent
-// setInterval(() => {
-//   const spent = Math.floor((Date.now() - start) / 1000);
-//   if (spent >= 1) stayedLongEnough = true;
-// }, intervalCheck);
-
 document.getElementById("ytBtn").onclick = () => {
-  // if (!stayedLongEnough) {
-  //   alert("Откроется через 10 секунд.");
-  //   return;
-  // }
   window.open(getRandomContent(), "_blank");
 };
 document.querySelectorAll(".version").forEach((el) => {

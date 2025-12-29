@@ -83,3 +83,111 @@ function changeColorAfterDelay() {
 changeColorAfterDelay();
 
 // return `rgb(${r}, ${g}, ${b})`;
+
+// WORD_STORAGE = ["the S-Shield is", 'symbol for "hope"'];
+// WORD_STORAGE = [
+//   undefined,
+//   NaN,
+//   "error",
+//   daysLeftTill2026((state = true)),
+//   "777",
+// ];
+
+// lyrics.addEventListener("wheel", (e) => {
+//   e.preventDefault();
+//   // Reduce scroll by 50%
+//   lyrics.scrollTop += e.deltaY * 0.4;
+// });
+
+//lyrics-functions
+
+// lyrics.addEventListener("mousedown", (e) => {
+//   if (e.button !== 0) return;
+
+//   if (index >= 0) {
+//     items[index].style.background = "";
+//     items[index].style.color = "";
+//   }
+
+//   index = (index + 1) % items.length;
+//   const current = items[index];
+
+//   current.style.background = "white";
+
+//   current.style.color = "black";
+
+//   current.scrollIntoView({
+//     behavior: "smooth",
+//     block: "start",
+//   });
+// });
+
+let WORD_STORAGE = [
+  // "-Привет",
+  // "Как делишки?",
+  // "-А, меня зовут... 😊",
+  // "#You-Dirty-Bustered!😆",
+  daysLeftTill2026(),
+];
+
+const wish_to_say_and_get = [
+  "Привет...",
+  "Как дела?",
+  "Как твои родители?",
+  "-Привет",
+  "-Хорошо, спасибо.",
+  // "Пошла на хуй!",
+  "-Прости за все боли 😕",
+];
+
+let WORD_STORAGE = [
+  // "-Привет",
+  // "Как делишки?",
+  // "-А, меня зовут... 😊",
+  // "#You-Dirty-Bustered!😆",
+  daysLeftTill2026(),
+];
+
+// "-Привет",
+// "Как делишки?",
+// "-А, меня зовут... 😊",
+// "#You-Dirty-Bustered!😆",
+
+// // check every 30 sec and save time spent
+// setInterval(() => {
+//   const spent = Math.floor((Date.now() - start) / 1000);
+//   if (spent >= 1) stayedLongEnough = true;
+// }, intervalCheck);
+
+// if (!stayedLongEnough) {
+//   alert("Откроется через 10 секунд.");
+//   return;
+// }
+
+// document.addEventListener("keydown", (e) => {
+//   const key = Number(e.key);
+//   if (key >= 1 && key <= songs.length) {
+//     if (develoerMode.devmodeEnterCount >= develoerMode.develoerModeEnter) {
+//       song_name = songs[key - 1];
+//       console.log("Selected:", song_name);
+//       develoerMode.inverse = true;
+//       develoerMode.mode = true;
+//       alert(
+//         "Alert! Developer mode is activated! <- Try not over use it! Song changed to:" +
+//           song_name
+//       );
+//     }
+//     if (develoerMode.devmodeEnterCount == develoerMode.develoerModeEnter - 3) {
+//       alert(`После дополнительных 3-попыток, у вас будет developer-mode.`);
+//       develoerMode.devmodeEnterCount += 1;
+//     } else {
+//       develoerMode.devmodeEnterCount += 1;
+//       console.warn(
+//         "DEVELOPER-MODE-IS-BEING-ACTIVATED! Attempt: " +
+//           develoerMode.devmodeEnterCount +
+//           "/" +
+//           develoerMode.develoerModeEnter
+//       );
+//     }
+//   }
+// }); // <- Developer mode! Try don't over use it mother-father!
