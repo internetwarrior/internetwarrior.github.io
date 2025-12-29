@@ -1,7 +1,7 @@
 //The Rome wasn't built in a single day!
 const lyrics = document.getElementById("lyrics");
 
-const isLyricsNeeded = false;
+const isLyricsNeeded = true;
 
 // lyrics-settings
 
@@ -13,85 +13,58 @@ const MELODY_SYMBOL = " ♪ ";
 
 let songLyrics = `
 
- <pre>
-Love, let's talk about love
-Is it anything and everything you hoped for?
-Or do the feeling haunt you?
-I know the feeling haunt you
+ <pre>I don't want a lot for Christmas,
+there is just one thing I need.
+I don't care about the presents
+underneath the Christmas tree.
+I just want you for my own,
+more than you will ever know.
+Make my wish come true!
 
-This may be the night that my dreams might let me know
-All the stars approach you
-All the stars approach you
-All the stars approach you
 
-This may be the night that my dreams might let me know
-All the stars are closer
-All the stars are closer
-All the stars are closer
+All I want for Christmas is you.
+Yeah!
 
-Tell me what you gon' do to me
-Confrontation ain't nothin' new to me
-You can bring a bullet, bring a sword, bring a morgue
-But you can't bring the truth to me
-Fuck you and all your expectations
-I don't even want your congratulations
-I recognize your false confidence
-And calculated promises all in your conversation
-I hate people that feel entitled
-Look at me crazy 'cause I ain't invite you
-Oh, you important?
-You the moral to the story? You endorsin'?
-Motherfucker, I don't even like you
-Corrupt a man's heart with a gift
-That's how you find out who you dealin' with
-A small percentage who I'm buildin' with
-I want the credit if I'm losin' or I'm winnin'
-On my momma, that's the realest shit
+I don't want a lot for Christmas,
+there is just one thing I need.
+Don't care about those presents underneath the Christmas tree.
+I don't need to hang my stocking there upon the fireplace.
+Santa Claus won't make me happy with a toy on Christmas day,
+I just want you for my own, more than you could ever know.
+Make my wish come true,
 
-Love, let's talk about love
-Is it anything and everything you hoped for?
-Or do the feeling haunt you?
-I know the feeling haunt you
+all I want for Christmas is you!
+Ooh, baby.
 
-This may be the night that my dreams might let me know
-All the stars approach you
-All the stars approach you
-All the stars approach you
+I won't ask for much this Christmas, I won't even wish for snow.
+I'm just gonna keep on waiting
+underneath the mistletoe.
+I won't make a list and send it to the North Pole for St. Nick.
+I won't even stay up late to hear those magical reindeers click.
+I just want you here tonight, holdin' on to me so tight!
+What more can I do?
 
-This may be the night that my dreams might let me know
-All the stars are closer
-All the stars are closer
-All the stars are closer
+All I want for Christmas is you!
 
-Skin covered in ego
-Get to talkin', I get involved, like a rebound
-No control, no off switch
-And the way that you bringin' me down
-It's a turn on, get it away from me
-Know you mean wrong, keep away from me
-And it's all wrong, get it away from me, yeah
-I, I just cry for no reason
-I just pray for no reason
-I just thank for the life, for the day
-For the hours and another life breathin'
-I did it all 'cause it feel good
-You could live it all if you feel bad
-Better live your life, we were runnin' out of time
+Wow, all the lights are shining so brightly everywhere,
+and the sound of children's laughter fills the air,
+and everyone is singing!
+I hear those sleigh bells ringing...
+Santa won't you bring me the one I really need, won't you please bring my baby to me?
 
-Love, let's talk about love
-Is it anything and everything you hoped for?
-Or do the feeling haunt you?
-I know the feeling haunt you
+Oh, I don't want a lot for Christmas,
+this is all I'm askin' for.
+I just wanna see my baby standin' right outside my door.
+I just want you for my own, more than you could ever know.
+Make my wish come true,
 
-This may be the night that my dreams might let me know
-All the stars approach you
-All the stars approach you
-All the stars approach you
+all I want for Christmas...
 
-This may be the night that my dreams might let me know
-All the stars are closer
-All the stars are closer
-All the stars are closer</pre
+is you!
+You!
+Oh, oh, oh-oh oh-oh-oh.
+Wow-oh, oh, oh-oh-oh.
+Ooh-ooh, oh...</pre
       >
 `;
 

@@ -15,7 +15,7 @@ const backgroundElement = document.getElementById("background");
 const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default
-let isCanvasFlipped = false;
+let isCanvasFlipped = true;
 
 const swearWords = "а, ты кто!?";
 
@@ -61,9 +61,9 @@ BAR_WIDTH = 0.2;
 
 IS_PLAYING = false;
 const COLOR_OBJ = {
-  color_1: 250, // Red
-  color_2: 250, // Green
-  color_3: 250, // Blue
+  color_1: 0, // Red //250
+  color_2: 55, // Green //250
+  color_3: 255, // Blue //250
 };
 
 IS_FIRST_CLICK = true;
@@ -78,9 +78,19 @@ const songs = [
   "Natali - O Bozhe Kakoj Muzhchina.mp3",
 ];
 
+const getRandomSong = () => {
+  return Math.floor(Math.random() * 2);
+};
+
 // let song_name = story.song;
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 song_name = songs[1];
+
+const new_year_songs = ["New_Year_Theme_1.mp3", "New_Year_Theme_2.mp3"];
+const number = getRandomSong();
+// alert(number);
+song_name = new_year_songs[number];
+song_name = "New_Year_Theme_2.mp3";
 
 let WORD_STORAGE = [daysLeftTill2026()];
 
