@@ -1,6 +1,8 @@
 // The Rome wasn't built in a single day
 const VERSION = "(0.7.2.3)-new-year-edition";
 
+const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
+
 const heroElement = document.querySelector("body");
 const bg = document.getElementById("background");
 const hero = document.getElementById("hero");
@@ -47,9 +49,6 @@ checkbox.checked = true;
 
 // antiHero.classList.add("hidden");
 swear.innerText = swearWords;
-
-const THE_QUESTION_MARK_LINK =
-  "https://www.letras.com/kendrick-lamar/all-the-stars/";
 
 const hints = [
   "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
