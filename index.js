@@ -1,5 +1,5 @@
 // The Rome wasn't built in a single day
-const VERSION = "(0.7.2.3)-new-year-edition";
+const VERSION = "(0.7.2.3.1)-new-year-edition";
 
 const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
 
