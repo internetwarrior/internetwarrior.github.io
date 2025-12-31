@@ -1,21 +1,35 @@
 // The Rome wasn't built in a single day
-const VERSION = "(0.7.2.2)";
+const VERSION = "(0.7.2.3)-new-year-edition";
 
 const heroElement = document.querySelector("body");
 const bg = document.getElementById("background");
 const hero = document.getElementById("hero");
 const antiHero = document.getElementById("anti-hero");
 const building = document.getElementById("buildings");
+const checkbox = document.querySelector(".anti-hero-checkbox input");
 
 const model = document.getElementById("model");
 const swear = document.getElementById("swear");
 const backgroundElement = document.getElementById("background");
 
+const COLOR_OBJ = {
+  color_1: 0, // Red //250
+  color_2: 46, // Green //250 55->47
+  color_3: 255, // Blue //250
+};
+
 //Settings
+
 const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
 const backgroudVolume = VOLUME - 0.8;
 let speed = 60; //30 is default
-let isCanvasFlipped = true;
+
+let isCanvasFlipped = false;
+let isChangeColor = false;
+let isCanFlip = false;
+let isDefaultAnimation = true;
+
+let snowSpeed = 10;
 
 const swearWords = "а, ты кто!?";
 
@@ -25,7 +39,13 @@ let fadeDuration = 2;
 
 // Temporary conditions
 
-antiHero.classList.add("hidden");
+antiHero.style.animation = isDefaultAnimation
+  ? "floating-2 4000ms infinite ease alternate"
+  : "";
+
+checkbox.checked = true;
+
+// antiHero.classList.add("hidden");
 swear.innerText = swearWords;
 
 const THE_QUESTION_MARK_LINK =
@@ -36,13 +56,10 @@ const hints = [
   "Не забудь f11 для вайба",
 ];
 
-let noChangeColor = true;
-
 //snow-settings
-let snowSpeed = 20;
 
 const develoerMode = {
-  debug: true,
+  debug: false,
   mode: false,
   inverse: false,
   devmodeEnterCount: 0,
@@ -60,15 +77,11 @@ let inverseMouseButtons = develoerMode.inverse;
 BAR_WIDTH = 0.2;
 
 IS_PLAYING = false;
-const COLOR_OBJ = {
-  color_1: 0, // Red //250
-  color_2: 55, // Green //250
-  color_3: 255, // Blue //250
-};
 
 IS_FIRST_CLICK = true;
 
 const songs = [
+  "Somewhere in My Memory, Home Alone, John Williams.mp3",
   "Kendrick Lamar  SZA - All the Stars.mp3",
   "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
   "Smash Mouth - All Star.mp3",
@@ -86,11 +99,10 @@ const getRandomSong = () => {
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 song_name = songs[1];
 
-const new_year_songs = ["New_Year_Theme_1.mp3", "New_Year_Theme_2.mp3"];
 const number = getRandomSong();
 // alert(number);
-song_name = new_year_songs[number];
-song_name = "New_Year_Theme_2.mp3";
+const new_year_song = "Somewhere in My Memory, Home Alone, John Williams.mp3";
+song_name = new_year_song;
 
 let WORD_STORAGE = [daysLeftTill2026()];
 
@@ -157,7 +169,7 @@ if (heroElement) {
 
     if (!inverseMouseButtons) {
       console.log("Left-clicked");
-      if (noChangeColor) {
+      if (!isChangeColor) {
         return;
       }
       heroElement.style.backgroundColor = getRandomColor();
@@ -181,7 +193,7 @@ if (heroElement) {
       }
     } else {
       console.log("Left-clicked (inverted)");
-      if (noChangeColor) {
+      if (!isChangeColor) {
         return;
       }
       heroElement.style.backgroundColor = getRandomColor();
@@ -250,10 +262,15 @@ document.addEventListener("mousemove", (e) => {
     building.style.transform = `translate(${x * -50}px, ${y * -50}px)`; // Parallax for building
   } else {
     // Normal transformations
+    // bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
+    // antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
+    // hero.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+    // building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
+
     bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
     antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
-    hero.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-    building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
+    hero.style.transform = `translate(${x * -40}px, ${y * 20}px)`;
+    building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
   }
 });
 
@@ -306,7 +323,6 @@ function moveToTop() {
     speed = 100;
   } // Ensure smooth transition
 }
-const checkbox = document.querySelector(".anti-hero-checkbox input");
 
 checkbox.addEventListener("change", () => {
   antiHero.style.animation = checkbox.checked

@@ -49,10 +49,13 @@
       <img src="./assets/png/bg-removed.png" id="background" />
 
       <div id="anti-hero">
-        <img src="./assets/png/anti-hero-3.png" />
+        <img src="./assets/png/anti-hero-4.png" />
       </div>
 
       <img src="./assets/png/the_hero.png" id="hero" />
+      <div class="image-elemets">
+        <img src="./assets/png/the_new_year_tree.png" id="xmas-tree" />
+      </div>
       <img src="./assets/png/snow-background.png" id="hero" class="snow" />
 
       <footer></footer>
@@ -60,18 +63,19 @@
     <canvas id="canvas"></canvas>
     <div id="start">
       <div class="window">
-        <small class="model-small-text warning-sign">
-          +16 Warning! Это чисто сугубо креативность автора! build:
-          <span class="version"></span>
-        </small>
-        <p>нажми, чтобы начать...</p>
         <div style="font-size: 16px" class="model-small-text">
           Подсказка:
-          <br />
+          <!-- <br /> -->
           <small>
             <span class="hint"> </span>
           </small>
         </div>
+
+        <p>нажми, чтобы начать...</p>
+        <small class="model-small-text warning-sign">
+          +16 Warning! Это чисто сугубо креативность автора! build:
+          <span class="version"></span>
+        </small>
         <div id="news"></div>
 
         <br />
@@ -79,24 +83,30 @@
     </div>
 
     <div id="model">
-      <h2>
+      <h2 class="hidden">
         - Кто ты,
         <span id="the-warrior"
           ><a target="_blank" href="achivements.html">воин</a></span
         >?
       </h2>
-      <h3 class="model-text">
+      <h3 class="model-text hidden">
         Совершенный, новый апгрейд
 
         <p class="swear" id="swear"></p>
       </h3>
+      <h2 class="model-text" id="ny-timer">Loading…</h2>
+      <small class="song-name">
+        Song: Somewhere in My Memory,<br />
+        Home Alone, John Williams
+      </small>
     </div>
     <div id="lyrics"></div>
 
     <canvas id="canvas-2"></canvas>
 
-    <script src="lyrics.js"></script>
     <script src="index.js"></script>
+    <script src="lyrics.js"></script>
     <script src="news.js"></script>
+    <script src="newYearTimer.js"></script>
   </body>
 </html>

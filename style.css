@@ -22,6 +22,16 @@
   user-select: none !important;
 }
 
+.image-elemets {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.image-elemets img {
+  width: 100%;
+  height: 100%;
+}
+
 .hidden {
   display: none !important;
   opacity: 0 !important;
@@ -49,8 +59,9 @@
 }
 
 .snow,
-buildings #hero,
+.buildings #hero,
 #buildings img,
+.image-elemets,
 #background {
   pointer-events: none !important;
 }
@@ -349,6 +360,21 @@ header nav button img {
   justify-content: center;
   scale: 0.7;
 }
+.song-name {
+  font-weight: 500;
+  /* border-bottom: 0.01px solid white; */
+  text-align: center;
+}
+
+#xmas-tree {
+  scale: 0.9;
+  transform: translateY(-100px);
+}
+
+.timer {
+  scale: 1.5;
+  margin-bottom: 20px;
+}
 
 header a {
   text-decoration: none;
@@ -363,7 +389,7 @@ header a {
 #hero {
   scale: 1.1;
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
-  left: -40px;
+  left: -120px;
 }
 
 @keyframes floating-2 {

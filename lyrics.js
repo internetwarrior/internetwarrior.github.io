@@ -1,7 +1,7 @@
 //The Rome wasn't built in a single day!
 const lyrics = document.getElementById("lyrics");
 
-const isLyricsNeeded = true;
+const isLyricsNeeded = false;
 
 // lyrics-settings
 
