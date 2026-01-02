@@ -1,9 +1,54 @@
 // The Rome wasn't built in a single day
-const VERSION = "(0.7.2.3.1)-new-year-edition";
+const VERSION = "0.7.4.2";
 
+//hero-settings
+const heroPositionBoosterX = 0.8;
+const heroPositionBoosterY = 0.8;
+
+//resource
 const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
 
-const heroElement = document.querySelector("body");
+//setting-variables
+const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
+const backgroudVolume = VOLUME - 0.1;
+const originalVolume = VOLUME;
+const fadeDuration = 2;
+
+let speed = 40; //30 is default -> 60 -> 40
+
+//speed-variables
+let snowSpeed = 15; //snow-setting 20 is default -> 10 -> 20
+
+//setting-color
+const COLOR_OBJ = {
+  color_1: 250, // Red //250 -> 0 ->250
+  color_2: 250, // Green //250 -> 55->47 -> 250
+  color_3: 250, // Blue //250 ->255 -> 250
+};
+
+//conditional-variables
+const isCanvasFlipped = false;
+const isChangeColor = false;
+const isCanFlip = false;
+const isDefaultAnimation = true;
+const isHeroPositionFixed = false;
+
+//theme-song-settings
+const backgrounSongs = [
+  "MONTAGEM XONADA.m4a",
+  "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
+  "MVSTERIOUS, Hxmr, yngastrobeatz, EVO  SLAVA FUNK.mp3",
+];
+
+let song_name =
+  backgrounSongs.length > 0
+    ? backgrounSongs[backgrounSongs.length - backgrounSongs.length]
+    : null;
+song_name = backgrounSongs[2];
+
+//imports from the DOM
+const bodyElement = document.querySelector("body");
+const heroElement = document.getElementById("hero");
 const bg = document.getElementById("background");
 const hero = document.getElementById("hero");
 const antiHero = document.getElementById("anti-hero");
@@ -14,38 +59,18 @@ const model = document.getElementById("model");
 const swear = document.getElementById("swear");
 const backgroundElement = document.getElementById("background");
 
-const COLOR_OBJ = {
-  color_1: 0, // Red //250
-  color_2: 46, // Green //250 55->47
-  color_3: 255, // Blue //250
-};
+//letter-settings
+let WORD_STORAGE = [
+  "#Thinkin'",
+  "#Working",
+  "#Thinking...",
+  // daysLeftUntilFeb7_2026(),
+];
+let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-//Settings
-
-const VOLUME = 1.0; // 0.2 is defualt ->0.5 -> 1.0
-const backgroudVolume = VOLUME - 0.8;
-let speed = 60; //30 is default
-
-let isCanvasFlipped = false;
-let isChangeColor = false;
-let isCanFlip = false;
-let isDefaultAnimation = true;
-
-let snowSpeed = 10;
-
-const swearWords = "а, ты кто!?";
-
+//others
+const swearWords = WORD_STORAGE[0]; //"а, ты кто!?";
 const UNHOVER_TEXT = "упс...";
-let originalVolume = VOLUME;
-let fadeDuration = 2;
-
-// Temporary conditions
-
-antiHero.style.animation = isDefaultAnimation
-  ? "floating-2 4000ms infinite ease alternate"
-  : "";
-
-checkbox.checked = true;
 
 // antiHero.classList.add("hidden");
 swear.innerText = swearWords;
@@ -53,9 +78,8 @@ swear.innerText = swearWords;
 const hints = [
   "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
   "Не забудь f11 для вайба",
+  song_name + "<- НАЗВАНИЕ_ПЕСНИ",
 ];
-
-//snow-settings
 
 const develoerMode = {
   debug: false,
@@ -69,6 +93,21 @@ if (develoerMode.debug) {
   develoerMode.develoerModeEnter = 0;
 }
 
+//Days left 'till new breath
+function daysLeftUntilFeb7_2026() {
+  const today = new Date();
+  const targetDate = new Date(2026, 1, 7); // Month is 0-based (1 = February)
+
+  // Remove time portion to avoid partial-day issues
+  today.setHours(0, 0, 0, 0);
+  targetDate.setHours(0, 0, 0, 0);
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const diffInMs = targetDate - today;
+  const result = Math.ceil(diffInMs / msPerDay);
+  return NaN;
+}
+
 //const startDelay = 3; for the future!
 const inverse = false;
 let inverseMouseButtons = develoerMode.inverse;
@@ -79,44 +118,21 @@ IS_PLAYING = false;
 
 IS_FIRST_CLICK = true;
 
-const songs = [
-  "Somewhere in My Memory, Home Alone, John Williams.mp3",
-  "Kendrick Lamar  SZA - All the Stars.mp3",
-  "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
-  "Smash Mouth - All Star.mp3",
-  "MrMoMMusic - Phao  2 Phut Hon KAIZ Remix  Animatio.mp3",
-  "Odnogo Tatyana Kurtukova.mp3",
-  "EMIN - Kamin Lyric Video.mp3",
-  "Natali - O Bozhe Kakoj Muzhchina.mp3",
-];
-
-const getRandomSong = () => {
-  return Math.floor(Math.random() * 2);
+//randomizer <- For the future updates
+const getRandomNumberByGivenAttribute = (giveNumber) => {
+  return Math.floor(Math.random() * giveNumber);
 };
-
-// let song_name = story.song;
-let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
-song_name = songs[1];
-
-const number = getRandomSong();
-// alert(number);
-const new_year_song = "Somewhere in My Memory, Home Alone, John Williams.mp3";
-song_name = new_year_song;
-
-let WORD_STORAGE = [daysLeftTill2026()];
-
-// Imported elements
-
-// Letter settings
-
-let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 let interval = 1;
 
-// Conditions for native elements
+//native-conditions
 
 if (isCanvasFlipped) {
   document.querySelector("#canvas").classList.toggle("flip-y");
+}
+
+if (isHeroPositionFixed) {
+  checkbox.checked = true;
 }
 
 //hint-function
@@ -159,8 +175,8 @@ function applyBackgroundColor() {
   document.body.style.backgroundColor = rgbColor;
 }
 
-if (heroElement) {
-  heroElement.addEventListener("click", function () {
+if (bodyElement) {
+  bodyElement.addEventListener("click", function () {
     if (IS_FIRST_CLICK) {
       IS_FIRST_CLICK = false;
       return;
@@ -171,31 +187,35 @@ if (heroElement) {
       if (!isChangeColor) {
         return;
       }
-      heroElement.style.backgroundColor = getRandomColor();
+      bodyElement.style.backgroundColor = getRandomColor();
     } else {
       console.log("Right-clicked (inverted)");
+      if (isCanFlip) {
+      }
       document.querySelector("#canvas").classList.toggle("flip-y");
       if (develoerMode.mode) {
-        heroElement.style.backgroundColor = getRandomColor();
+        bodyElement.style.backgroundColor = getRandomColor();
       }
     }
   });
 
-  heroElement.addEventListener("contextmenu", function (event) {
+  bodyElement.addEventListener("contextmenu", function (event) {
     event.preventDefault();
 
     if (!inverseMouseButtons) {
       console.log("Right-clicked");
-      document.querySelector("#canvas").classList.toggle("flip-y");
+      if (isCanFlip) {
+        document.querySelector("#canvas").classList.toggle("flip-y");
+      }
       if (develoerMode.mode) {
-        heroElement.style.backgroundColor = getRandomColor();
+        bodyElement.style.backgroundColor = getRandomColor();
       }
     } else {
       console.log("Left-clicked (inverted)");
       if (!isChangeColor) {
         return;
       }
-      heroElement.style.backgroundColor = getRandomColor();
+      bodyElement.style.backgroundColor = getRandomColor();
     }
   });
 }
@@ -209,17 +229,6 @@ function getRandomColor() {
 
 function getRandomContent() {
   return THE_QUESTION_MARK_LINK;
-}
-
-function daysLeftTill2026(state = false) {
-  const now = new Date();
-  const newYear = new Date("2026-01-01T00:00:00");
-  const diff = newYear - now;
-  const days = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  if (state) {
-    return `Осталось ${days} дней до НГ!`;
-  }
-  return `Осталось ${days} дня до НГ `; //🥳;
 }
 
 function exitFullScreenOnEscape(event) {
@@ -250,8 +259,6 @@ document.addEventListener("mousemove", (e) => {
   const x = e.clientX / window.innerWidth - 0.5;
   const y = e.clientY / window.innerHeight - 0.5;
 
-  // Get the 'building' element
-  // Check if the inverse mode is active
   //hero-settings
   if (inverse) {
     // Inverted transformations
@@ -260,16 +267,11 @@ document.addEventListener("mousemove", (e) => {
     hero.style.transform = `translate(${x * -120}px, ${y * -40}px)`;
     building.style.transform = `translate(${x * -50}px, ${y * -50}px)`; // Parallax for building
   } else {
-    // Normal transformations
-    // bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
-    // antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
-    // hero.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
-    // building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
-
+    // Regular mode transformations
     bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
+    hero.style.transform = `translate(${x * 40}px, ${y * 20}px)`;
     antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
-    hero.style.transform = `translate(${x * -40}px, ${y * 20}px)`;
-    building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
+    building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
   }
 });
 
@@ -308,13 +310,12 @@ function processArrayBuffer(arrayBuffer) {
 }
 
 // on-start-fucntion
-
 function moveToTop() {
   const buildings = document.getElementById("buildings");
   buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
   antiHero.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
   lyrics.style.opacity = "1";
-  if (song_name !== songs[3]) {
+  if (song_name !== backgrounSongs[3]) {
     antiHero.style.top = "-5%"; // Move the element to the top
     buildings.style.bottom = "0%"; // Move the element to the top
   } else {
@@ -328,26 +329,26 @@ checkbox.addEventListener("change", () => {
     ? "floating-2 4000ms infinite ease alternate"
     : "none";
   hero.style.animation = checkbox.checked
-    ? "animation: floating-2 10000ms 100ms infinite ease-in-out alternate;"
+    ? "floating-2 4000ms infinite ease alternate"
     : "none";
 });
 
 async function loadDefaultAudio() {
-  hero.style.animation = "none";
+  if (!isHeroPositionFixed) {
+    hero.style.animation = "none";
+  }
   if (IS_PLAYING) return;
   moveToTop();
 
-  const heroElement = document.getElementById("hero");
   model.style.opacity = "1";
-
   backgroundElement.style.filter =
-    " hue-rotate(240deg) saturate(150%) brightness(105%)";
-  backgroundElement.style.opacity = "0.5";
-  // heroElement.style.opacity = "1";
-  // heroElement.classList.add("hero-down");
+    "hue-rotate(270deg) saturate(200%) brightness(110%)";
 
   heroElement.style.filter =
-    " hue-rotate(240deg) saturate(150%) brightness(105%)";
+    "hue-rotate(270deg) saturate(200%) brightness(110%)";
+
+  backgroundElement.style.opacity = "0.5";
+
   swear.style.animation =
     "borderDisappear var( --animation-duration) forwards ease-out";
 
@@ -355,7 +356,7 @@ async function loadDefaultAudio() {
   startElement.style.opacity = "0";
   setTimeout(() => (startElement.style.display = "none"), 300);
 
-  const response = await fetch(`./assets/songs/${song_name}`);
+  const response = await fetch(`./assets/song/${song_name}`);
   // const response = await fetch("./song_2.mp3");
   const arrayBuffer = await response.arrayBuffer();
   processArrayBuffer(arrayBuffer);
@@ -426,8 +427,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
   draw();
 }
 
-// Swear function
-
+//argument-function
 const el = document.querySelector(".swear");
 el.addEventListener("mouseover", (event) => {
   let iteration = 0;
@@ -560,5 +560,5 @@ document.getElementById("ytBtn").onclick = () => {
   window.open(getRandomContent(), "_blank");
 };
 document.querySelectorAll(".version").forEach((el) => {
-  el.innerText = VERSION;
+  el.innerText = "(" + VERSION + ")";
 });

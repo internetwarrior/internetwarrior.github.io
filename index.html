@@ -16,11 +16,11 @@
     <header>
       <nav>
         <!-- <button id="settingsBtn" onclick="settingsButton()">
-          <img src="./assets/svg/settings_svg.svg" alt="" />
+          <img src="./assets/images/svg/settings_svg.svg" alt="" />
         </button> -->
 
         <button id="ytBtn">
-          <img src="./assets/svg/question_mark_svg.svg" alt="" />
+          <img src="./assets/images/svg/question_mark_svg.svg" alt="" />
         </button>
 
         <a href="https://portfolio-ashen-sigma-82.vercel.app/" target="_blank"
@@ -32,31 +32,29 @@
       <h3>Настройки</h3>
       <ul>
         <li>
-          <form>
-            <label class="anti-hero-checkbox">
-              <input type="checkbox" value="true" />
-              Анимация
-            </label>
-          </form>
+          <label class="anti-hero-checkbox">
+            <input type="checkbox" value="true" />
+            Фиксированный
+          </label>
         </li>
       </ul>
     </div>
 
     <div class="bg-wrap">
       <div id="buildings">
-        <img src="./assets/png/the-woman.png" class="new-female-hero" />
-      </div>
-      <img src="./assets/png/bg-removed.png" id="background" />
-
-      <div id="anti-hero">
-        <img src="./assets/png/anti-hero-4.png" />
+        <img
+          src="./assets/images/png/the-woman.png"
+          class="new-female-hero hidden"
+        />
       </div>
 
-      <img src="./assets/png/the_hero.png" id="hero" />
-      <div class="image-elemets">
-        <img src="./assets/png/the_new_year_tree.png" id="xmas-tree" />
+      <img src="./assets/images/png/bg-removed.png" id="background" />
+      <div id="anti-hero" class="hidden">
+        <img src="./assets/images/png/anti-hero-4.png" />
       </div>
-      <img src="./assets/png/snow-background.png" id="hero" class="snow" />
+      <img src="./assets/images/png/the_hero.png" id="hero" />
+
+      <img src="./assets/images/png/snow-background.png" class="snow" />
 
       <footer></footer>
     </div>
@@ -83,23 +81,19 @@
     </div>
 
     <div id="model">
-      <h2 class="hidden">
+      <h2 class="">
         - Кто ты,
         <span id="the-warrior"
           ><a target="_blank" href="achivements.html">воин</a></span
         >?
       </h2>
-      <h3 class="model-text hidden">
-        Совершенный, новый апгрейд
+      <h3 class="model-text">
+        Совершенный и новый апгрейд.
 
         <p class="swear" id="swear"></p>
       </h3>
-      <h2 class="model-text" id="ny-timer">Loading…</h2>
-      <small class="song-name">
-        Song: Somewhere in My Memory,<br />
-        Home Alone, John Williams
-      </small>
     </div>
+
     <div id="lyrics"></div>
 
     <canvas id="canvas-2"></canvas>
@@ -107,6 +101,5 @@
     <script src="index.js"></script>
     <script src="lyrics.js"></script>
     <script src="news.js"></script>
-    <script src="newYearTimer.js"></script>
   </body>
 </html>
