@@ -60,7 +60,7 @@
 
 .snow,
 #hero,
-#buildings img,
+img,
 .image-elemets,
 #background {
   pointer-events: none !important;
@@ -154,8 +154,9 @@ footer {
 
 #hero {
   z-index: 1;
-  scale: 1.2;
+  scale: 1.1;
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
+  left: -100px;
 }
 #buildings {
   display: none;

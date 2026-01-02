@@ -2,8 +2,8 @@
 const VERSION = "0.7.4.2";
 
 //hero-settings
-const heroPositionBoosterX = 0.8;
-const heroPositionBoosterY = 0.8;
+// const heroPositionBoosterX = 0.8;
+// const heroPositionBoosterY = 0.8;
 
 //resource
 const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
@@ -28,25 +28,23 @@ const COLOR_OBJ = {
 
 //conditional-variables
 const isCanvasFlipped = false;
-const isChangeColor = false;
-const isCanFlip = false;
+const isChangeColor = true;
+const isCanFlip = true;
 const isDefaultAnimation = true;
-const isHeroPositionFixed = false;
+const AntiHeroAnimation = true;
 
 //theme-song-settings
-const backgrounSongs = [
-  "MONTAGEM XONADA.m4a",
-  "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
-  "MVSTERIOUS, Hxmr, yngastrobeatz, EVO  SLAVA FUNK.mp3",
+let songs = [
+  "Odnogo Tatyana Kurtukova.mp3",
+  // "MONTAGEM XONADA.m4a",
+  // "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
+  // "MVSTERIOUS, Hxmr, yngastrobeatz, EVO  SLAVA FUNK.mp3",
 ];
 
-let song_name =
-  backgrounSongs.length > 0
-    ? backgrounSongs[backgrounSongs.length - backgrounSongs.length]
-    : null;
-song_name = backgrounSongs[2];
+let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
+song_name = songs[0];
 
-//imports from the DOM
+//imported elements
 const bodyElement = document.querySelector("body");
 const heroElement = document.getElementById("hero");
 const bg = document.getElementById("background");
@@ -78,7 +76,7 @@ swear.innerText = swearWords;
 const hints = [
   "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
   "Не забудь f11 для вайба",
-  song_name + "<- НАЗВАНИЕ_ПЕСНИ",
+  // song_name,
 ];
 
 const develoerMode = {
@@ -93,20 +91,20 @@ if (develoerMode.debug) {
   develoerMode.develoerModeEnter = 0;
 }
 
-//Days left 'till new breath
-function daysLeftUntilFeb7_2026() {
-  const today = new Date();
-  const targetDate = new Date(2026, 1, 7); // Month is 0-based (1 = February)
+// //Days left 'till new breath
+// function daysLeftUntilFeb7_2026() {
+//   const today = new Date();
+//   const targetDate = new Date(2026, 1, 7); // Month is 0-based (1 = February)
 
-  // Remove time portion to avoid partial-day issues
-  today.setHours(0, 0, 0, 0);
-  targetDate.setHours(0, 0, 0, 0);
+//   // Remove time portion to avoid partial-day issues
+//   today.setHours(0, 0, 0, 0);
+//   targetDate.setHours(0, 0, 0, 0);
 
-  const msPerDay = 1000 * 60 * 60 * 24;
-  const diffInMs = targetDate - today;
-  const result = Math.ceil(diffInMs / msPerDay);
-  return NaN;
-}
+//   const msPerDay = 1000 * 60 * 60 * 24;
+//   const diffInMs = targetDate - today;
+//   const result = Math.ceil(diffInMs / msPerDay);
+//   return NaN;
+// }
 
 //const startDelay = 3; for the future!
 const inverse = false;
@@ -131,7 +129,7 @@ if (isCanvasFlipped) {
   document.querySelector("#canvas").classList.toggle("flip-y");
 }
 
-if (isHeroPositionFixed) {
+if (AntiHeroAnimation) {
   checkbox.checked = true;
 }
 
@@ -315,7 +313,7 @@ function moveToTop() {
   buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
   antiHero.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
   lyrics.style.opacity = "1";
-  if (song_name !== backgrounSongs[3]) {
+  if (song_name !== songs[3]) {
     antiHero.style.top = "-5%"; // Move the element to the top
     buildings.style.bottom = "0%"; // Move the element to the top
   } else {
@@ -328,24 +326,23 @@ checkbox.addEventListener("change", () => {
   antiHero.style.animation = checkbox.checked
     ? "floating-2 4000ms infinite ease alternate"
     : "none";
-  hero.style.animation = checkbox.checked
-    ? "floating-2 4000ms infinite ease alternate"
-    : "none";
+  // hero.style.animation = checkbox.checked
+  //   ? "floating-2 4000ms infinite ease alternate"
+  //   : "none";
 });
 
 async function loadDefaultAudio() {
-  if (!isHeroPositionFixed) {
-    hero.style.animation = "none";
-  }
+  hero.style.animation = "none";
   if (IS_PLAYING) return;
   moveToTop();
 
   model.style.opacity = "1";
-  backgroundElement.style.filter =
-    "hue-rotate(270deg) saturate(200%) brightness(110%)";
 
-  heroElement.style.filter =
-    "hue-rotate(270deg) saturate(200%) brightness(110%)";
+  // backgroundElement.style.filter =
+  //   "hue-rotate(270deg) saturate(200%) brightness(110%)";
+
+  // heroElement.style.filter =
+  //   "hue-rotate(270deg) saturate(200%) brightness(110%)";
 
   backgroundElement.style.opacity = "0.5";
 
