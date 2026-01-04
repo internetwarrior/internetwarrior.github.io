@@ -1,5 +1,5 @@
 // The Rome wasn't built in a single day
-const VERSION = "0.7.4.2";
+const VERSION = "0.7.3.4.2";
 
 //hero-settings
 // const heroPositionBoosterX = 0.8;
@@ -9,8 +9,11 @@ const VERSION = "0.7.4.2";
 const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
 
 //setting-variables
-const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
-const backgroudVolume = VOLUME - 0.1;
+const VOLUME = 1; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME_BACKGROUN = 0.2;
+
+// Other Volume Settings.
+const backgroudVolume = VOLUME * VOLUME_BACKGROUN;
 const originalVolume = VOLUME;
 const fadeDuration = 2;
 
@@ -182,18 +185,12 @@ if (bodyElement) {
 
     if (!inverseMouseButtons) {
       console.log("Left-clicked");
-      if (!isChangeColor) {
-        return;
-      }
       bodyElement.style.backgroundColor = getRandomColor();
     } else {
       console.log("Right-clicked (inverted)");
-      if (isCanFlip) {
-      }
+
       document.querySelector("#canvas").classList.toggle("flip-y");
-      if (develoerMode.mode) {
-        bodyElement.style.backgroundColor = getRandomColor();
-      }
+      bodyElement.style.backgroundColor = getRandomColor();
     }
   });
 
@@ -205,14 +202,12 @@ if (bodyElement) {
       if (isCanFlip) {
         document.querySelector("#canvas").classList.toggle("flip-y");
       }
-      if (develoerMode.mode) {
-        bodyElement.style.backgroundColor = getRandomColor();
-      }
+
+      bodyElement.style.backgroundColor = getRandomColor();
     } else {
       console.log("Left-clicked (inverted)");
-      if (!isChangeColor) {
-        return;
-      }
+
+      return;
       bodyElement.style.backgroundColor = getRandomColor();
     }
   });
@@ -312,6 +307,9 @@ function moveToTop() {
   const buildings = document.getElementById("buildings");
   buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
   antiHero.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
+  if (AntiHeroAnimation) {
+    antiHero.style.animation = "floating-2 4000ms infinite ease alternate";
+  }
   lyrics.style.opacity = "1";
   if (song_name !== songs[3]) {
     antiHero.style.top = "-5%"; // Move the element to the top
