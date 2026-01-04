@@ -38,6 +38,7 @@ const AntiHeroAnimation = true;
 
 //theme-song-settings
 let songs = [
+  "MONTAGEM RUGADA.m4a",
   "Odnogo Tatyana Kurtukova.mp3",
   // "MONTAGEM XONADA.m4a",
   // "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
