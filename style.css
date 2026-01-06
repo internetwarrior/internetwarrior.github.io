@@ -154,9 +154,10 @@ footer {
 
 #hero {
   z-index: 1;
-  scale: 1.1;
+  scale: 1;
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
-  left: -100px;
+  /* left: -100px;   */
+  top: 30px;
 }
 #buildings {
   display: none;
@@ -446,4 +447,35 @@ header a {
     transform: translateY(20px);
     scale: 1;
   }
+}
+
+#lyrics {
+}
+#lyrics ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul li {
+  text-decoration: none;
+}
+
+#lyrics ul li {
+  padding: 2px 6px;
+  border-radius: 1px;
+}
+.melody-highlight::before {
+  content: " ♪ "; /* Melody symbol before text */
+}
+
+.melody-highlight::after {
+  content: " ♪ "; /* Melody symbol after text */
+}
+
+/* Optional: Style the highlighted item */
+.melody-highlight {
+  background: white;
+  color: black;
 }

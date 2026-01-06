@@ -1,26 +1,45 @@
 // The Rome wasn't built in a single day
-const VERSION = "0.7.3.4.2";
+// Warning! This project even has no copyright, all rights is reveiced by Author!
+// Please be CAUTIOUS of using this code!
+// Thanks for attention! Fork the code, thanks :thumbs-up
+// Good luck with yor coding
+
+const VERSION = "0.7.8.7";
 
 //hero-settings
 // const heroPositionBoosterX = 0.8;
 // const heroPositionBoosterY = 0.8;
 
+//Hero settings
+const heroParalaxSpeed = {
+  x: 40, //px
+  y: 10, //px
+}; // default X position -> 60 px
+//default Y position -> 30 px
+
 //resource
 const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
 
 //setting-variables
-const VOLUME = 1; // 0.2 is defualt ->0.5 -> 1.0
-const VOLUME_BACKGROUN = 0.2;
+const VOLUME = 0.8; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME_BACKGROUN = 0.6;
 
 // Other Volume Settings.
 const backgroudVolume = VOLUME * VOLUME_BACKGROUN;
 const originalVolume = VOLUME;
 const fadeDuration = 2;
 
-let speed = 40; //30 is default -> 60 -> 40
+let speed = 40; //30 is default -> 60 -> 40 -> 35
 
 //speed-variables
 let snowSpeed = 15; //snow-setting 20 is default -> 10 -> 20
+
+//conditional-variables
+const isCanvasFlipped = false;
+const isChangeColor = true;
+const isDefaultAnimation = true;
+const AntiHeroAnimation = true;
+const isCanFlip = true;
 
 //setting-color
 const COLOR_OBJ = {
@@ -29,12 +48,10 @@ const COLOR_OBJ = {
   color_3: 250, // Blue //250 ->255 -> 250
 };
 
-//conditional-variables
-const isCanvasFlipped = false;
-const isChangeColor = true;
-const isCanFlip = true;
-const isDefaultAnimation = true;
-const AntiHeroAnimation = true;
+// default X position -> 60 px
+//default Y position -> 60 px
+
+//Anti-hero settings
 
 //theme-song-settings
 let songs = [
@@ -62,12 +79,7 @@ const swear = document.getElementById("swear");
 const backgroundElement = document.getElementById("background");
 
 //letter-settings
-let WORD_STORAGE = [
-  "#Thinkin'",
-  "#Working",
-  "#Thinking...",
-  // daysLeftUntilFeb7_2026(),
-];
+let WORD_STORAGE = ["#Thinkin'", "#Working", "#Thinking..."];
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 //others
@@ -89,7 +101,7 @@ const develoerMode = {
   inverse: false,
   devmodeEnterCount: 0,
   develoerModeEnter: 10,
-};
+}; // voice_down: false, <- for the future.
 
 if (develoerMode.debug) {
   develoerMode.develoerModeEnter = 0;
@@ -186,12 +198,12 @@ if (bodyElement) {
 
     if (!inverseMouseButtons) {
       console.log("Left-clicked");
-      bodyElement.style.backgroundColor = getRandomColor();
+      bodyElement.style.backgroundColor = getRandomColor((leftButton = true));
     } else {
       console.log("Right-clicked (inverted)");
 
       document.querySelector("#canvas").classList.toggle("flip-y");
-      bodyElement.style.backgroundColor = getRandomColor();
+      bodyElement.style.backgroundColor = getRandomColor((leftButton = true));
     }
   });
 
@@ -215,7 +227,13 @@ if (bodyElement) {
 }
 
 // Function to generate a random color
-function getRandomColor() {
+function getRandomColor(leftButton = false) {
+  if (!isChangeColor) {
+    return;
+  }
+  if (!leftButton) {
+    return;
+  }
   COLOR_OBJ.color_1 = Math.floor(Math.random() * 256); // Random number between 0 and 255
   COLOR_OBJ.color_2 = Math.floor(Math.random() * 256); // Random number between 0 and 255
   COLOR_OBJ.color_3 = Math.floor(Math.random() * 256); // Random number between 0 and 255
@@ -262,10 +280,13 @@ document.addEventListener("mousemove", (e) => {
     building.style.transform = `translate(${x * -50}px, ${y * -50}px)`; // Parallax for building
   } else {
     // Regular mode transformations
-    bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(1.05)`;
-    hero.style.transform = `translate(${x * 40}px, ${y * 20}px)`;
-    antiHero.style.transform = `translate(${x * -10}px, ${y * -20}px)`;
-    building.style.transform = `translate(${x * 120}px, ${y * 60}px)`; // Parallax for building
+    bg.style.transform = `translate(${x * -30}px, ${y * -30}px) scale(1.05)`;
+    hero.style.transform = `translate(${x * heroParalaxSpeed.x}px, ${
+      y * heroParalaxSpeed.y
+    }px)`;
+
+    antiHero.style.transform = `translate(${x * -30}px, ${y * 10}px)`;
+    building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
   }
 });
 
