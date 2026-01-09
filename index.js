@@ -4,7 +4,7 @@
 // Thanks for attention! Fork the code, thanks :thumbs-up
 // Good luck with yor coding
 
-const VERSION = "0.7.8.7.2"; // The begining
+const VERSION = "0.7.8.7.2.0"; // The begining
 
 //hero-settings
 // const heroPositionBoosterX = 0.8;
