@@ -18,7 +18,8 @@ const heroParalaxSpeed = {
 //default Y position -> 30 px
 
 //resource
-const THE_QUESTION_MARK_LINK = "https://www.youtube.com/watch?v=jEDaVHmw7r4";
+const THE_QUESTION_MARK_LINK =
+  "https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1";
 
 //setting-variables
 const VOLUME = 0.8; // 0.2 is defualt ->0.5 -> 1.0
@@ -55,6 +56,7 @@ const COLOR_OBJ = {
 
 //theme-song-settings
 let songs = [
+  "Jax 0214 - bat ele unutam.mp3",
   "MONTAGEM RUGADA.m4a",
   "Odnogo Tatyana Kurtukova.mp3",
   // "MONTAGEM XONADA.m4a",
@@ -79,7 +81,7 @@ const swear = document.getElementById("swear");
 const backgroundElement = document.getElementById("background");
 
 //letter-settings
-let WORD_STORAGE = ["#Thinkin'", "#Working", "#Thinking..."];
+let WORD_STORAGE = ["-Привет", "-Как дела?", "-Давай, до свидание"];
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 //others
@@ -305,7 +307,7 @@ function processArrayBuffer(arrayBuffer) {
     gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
     gainNode.gain.linearRampToValueAtTime(
       backgroudVolume,
-      currentTime + fadeDuration
+      currentTime + fadeDuration,
     );
   }
 
@@ -315,7 +317,7 @@ function processArrayBuffer(arrayBuffer) {
     gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
     gainNode.gain.linearRampToValueAtTime(
       originalVolume,
-      currentTime + fadeDuration
+      currentTime + fadeDuration,
     );
   }
 
@@ -428,7 +430,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
         rightX,
         canvas.height - value / 1.2,
         barWidth - BAR_WIDTH,
-        value
+        value,
       );
 
       const leftX = midX_2 - i * barWidth;
@@ -436,7 +438,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
         leftX,
         canvas.height - value / 1.2,
         barWidth - BAR_WIDTH,
-        value
+        value,
       );
     }
   }
