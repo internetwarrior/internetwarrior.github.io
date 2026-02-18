@@ -1,18 +1,20 @@
 // --- Snake ---
 const segments = 40;
 const snake = [];
+const heroParent = hero.parentElement;
 
 for (let i = 0; i < segments; i++) {
   const div = document.createElement("div");
   div.className = "segment";
-  document.body.appendChild(div);
+
+  heroParent.appendChild(div); // same level as hero
+
   snake.push({
     el: div,
     x: window.innerWidth / 2,
     y: window.innerHeight / 2,
   });
 }
-
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 let snakeActive = false;

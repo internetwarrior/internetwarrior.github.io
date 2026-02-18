@@ -505,6 +505,11 @@ ul li {
     height 0.2s;
   z-index: 9999;
 }
+
+#hero {
+  z-index: 10000 !important;
+}
+
 .segment {
   position: fixed;
   width: 12px;
@@ -515,7 +520,7 @@ ul li {
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.2s;
-  z-index: 9999;
+  z-index: 100;
 
   left: 50%;
   top: 50%;
