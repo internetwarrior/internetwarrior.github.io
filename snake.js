@@ -51,7 +51,7 @@ violinCheckbox.addEventListener("change", () => {
   console.log("Violin animation:", violinActive);
 });
 
-function animate() {
+function animateSnake() {
   let targetX = snakeActive ? mouseX : snake[0].x;
   let targetY = snakeActive ? mouseY : snake[0].y;
 
@@ -69,7 +69,7 @@ function animate() {
     segment.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
   });
 
-  requestAnimationFrame(animate);
+  requestAnimationFrame(animateSnake);
 }
 
-animate();
+animateSnake();

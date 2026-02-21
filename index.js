@@ -4,7 +4,7 @@
 // Thanks for attention! Fork the code, thanks :thumbs-up
 // Good luck with yor coding
 
-const VERSION = "0.7.8.7.2.0"; // The begining
+const VERSION = "0.8.0"; // The begining
 
 //hero-settings
 // const heroPositionBoosterX = 0.8;
@@ -12,7 +12,7 @@ const VERSION = "0.7.8.7.2.0"; // The begining
 
 //Hero settings
 const heroParalaxSpeed = {
-  x: 40, //px
+  x: 80, //px
   y: 10, //px
 }; // default X position -> 60 px
 //default Y position -> 30 px
@@ -22,7 +22,7 @@ const THE_QUESTION_MARK_LINK =
   "https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1";
 
 //setting-variables
-const VOLUME = 0.8; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
 const VOLUME_BACKGROUN = 0.6;
 
 // Other Volume Settings.
@@ -56,6 +56,7 @@ const COLOR_OBJ = {
 
 //theme-song-settings
 let songs = [
+  "Amirchik - Amirchik  Eto lubov Cinta Ini Official.mp3",
   "Jax 0214 - bat ele unutam.mp3",
   "MONTAGEM RUGADA.m4a",
   "Odnogo Tatyana Kurtukova.mp3",
@@ -287,7 +288,7 @@ document.addEventListener("mousemove", (e) => {
       y * heroParalaxSpeed.y
     }px)`;
 
-    antiHero.style.transform = `translate(${x * -30}px, ${y * 10}px)`;
+    antiHero.style.transform = `translate(${x * -60}px, ${y * 20}px)`;
     building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
   }
 });
