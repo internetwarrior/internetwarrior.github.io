@@ -22,7 +22,7 @@ const THE_QUESTION_MARK_LINK =
   "https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1";
 
 //setting-variables
-const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME = 0.6; // 0.2 is defualt ->0.5 -> 1.0
 const VOLUME_BACKGROUN = 0.6;
 
 // Other Volume Settings.
@@ -38,8 +38,8 @@ let snowSpeed = 15; //snow-setting 20 is default -> 10 -> 20
 //conditional-variables
 const isCanvasFlipped = false;
 const isChangeColor = true;
-const isDefaultAnimation = true;
-const AntiHeroAnimation = true;
+const isDefaultAnimation = false;
+const AntiHeroAnimation = false;
 const isCanFlip = true;
 
 //setting-color
@@ -288,7 +288,7 @@ document.addEventListener("mousemove", (e) => {
       y * heroParalaxSpeed.y
     }px)`;
 
-    antiHero.style.transform = `translate(${x * -60}px, ${y * 20}px)`;
+    antiHero.style.transform = `translate(${x * -120}px, ${y * -60}px)`;
     building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
   }
 });

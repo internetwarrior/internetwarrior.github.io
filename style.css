@@ -29,6 +29,9 @@
   --anti-hero-border-width: 5px;
   --anti-hero-opacity: 1;
   --anti-hero-hitbox: transparent;
+  --anti-hero-scale: 0.7;
+
+  --hero-scale: 1.1;
   user-select: none !important;
 }
 
@@ -164,7 +167,7 @@ footer {
 
 #hero {
   z-index: 1;
-  scale: 1;
+  scale: var(--hero-scale);
   animation: floating-2 10000ms 100ms infinite ease-in-out alternate;
   /* left: -100px;   */
   top: 30px;
@@ -197,6 +200,7 @@ footer {
   display: var(--anti-hero-visibility);
   outline: var(--anti-hero-hitbox) var(--anti-hero-border-width) solid;
   opacity: var(--anti-hero-opacity);
+  scale: var(--anti-hero-scale);
 }
 
 #anti-hero img {
