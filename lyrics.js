@@ -1,15 +1,15 @@
 //The Rome wasn't built in a single day!
-const lyrics = document.getElementById("lyrics");
+const lyrics = document.getElementById('lyrics');
 
-const isLyricsNeeded = true;
+const isLyricsNeeded = false;
 
 // lyrics-settings
 
 if (!isLyricsNeeded) {
-  lyrics.classList.add("hidden");
+  lyrics.classList.add('hidden');
 }
 
-const MELODY_SYMBOL = " ♪ ";
+const MELODY_SYMBOL = ' ♪ ';
 
 let songLyrics = `
 
@@ -66,17 +66,17 @@ let songLyrics = `
 lyrics.innerHTML = songLyrics;
 
 function preToList(preElement) {
-  const ul = document.createElement("ul");
-  ul.style.listStyle = "none";
-  ul.style.padding = "0";
-  ul.style.margin = "0";
+  const ul = document.createElement('ul');
+  ul.style.listStyle = 'none';
+  ul.style.padding = '0';
+  ul.style.margin = '0';
 
   preElement.innerText
-    .split("\n")
-    .map((l) => l.trim())
+    .split('\n')
+    .map(l => l.trim())
     .filter(Boolean)
-    .forEach((line) => {
-      const li = document.createElement("li");
+    .forEach(line => {
+      const li = document.createElement('li');
       li.textContent = line;
       ul.appendChild(li);
     });
@@ -84,18 +84,18 @@ function preToList(preElement) {
   preElement.replaceWith(ul);
   return ul;
 }
-const pre = lyrics.querySelector("pre");
+const pre = lyrics.querySelector('pre');
 const ul = preToList(pre);
 
-const items = [...ul.querySelectorAll("li")];
+const items = [...ul.querySelectorAll('li')];
 let index = -1;
 
 // Define the class that adds the melody symbols
-const MELODY_CLASS = "melody-highlight";
+const MELODY_CLASS = 'melody-highlight';
 
-document.addEventListener("keydown", (e) => {
+document.addEventListener('keydown', e => {
   // Move to the next item
-  if (e.code === "Space" && !e.shiftKey) {
+  if (e.code === 'Space' && !e.shiftKey) {
     e.preventDefault();
 
     // Clear the class from the previous item
@@ -112,13 +112,13 @@ document.addEventListener("keydown", (e) => {
 
     // Scroll the current item into view
     current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+      behavior: 'smooth',
+      block: 'start',
     });
   }
 
   // Move to the previous item
-  if (e.code === "Space" && e.shiftKey) {
+  if (e.code === 'Space' && e.shiftKey) {
     e.preventDefault();
 
     // Clear the class from the previous item
@@ -135,8 +135,8 @@ document.addEventListener("keydown", (e) => {
 
     // Scroll the current item into view
     current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
+      behavior: 'smooth',
+      block: 'start',
     });
   }
 });
