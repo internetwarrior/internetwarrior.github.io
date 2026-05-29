@@ -642,3 +642,35 @@ document.getElementById('ytBtn').onclick = () => {
 document.querySelectorAll('.version').forEach(el => {
   el.innerText = '(' + VERSION + ')';
 });
+
+const lightning = document.querySelector('.lightning');
+
+function createLightning() {
+  const bolt = document.createElement('div');
+
+  bolt.classList.add('bolt');
+
+  bolt.style.left = Math.random() * window.innerWidth + 'px';
+
+  const rotate = Math.random() * 40 - 20;
+  bolt.style.transform = `rotate(${rotate}deg)`;
+
+  lightning.appendChild(bolt);
+
+  document.body.classList.add('flash');
+
+  setTimeout(() => {
+    document.body.classList.remove('flash');
+  }, 500);
+
+  setTimeout(() => {
+    bolt.remove();
+  }, 500);
+}
+
+setInterval(
+  () => {
+    createLightning();
+  },
+  Math.random() * 4000 + 2000
+);
