@@ -14,6 +14,13 @@
     </head>
     <body class="flash">
       <!-- <div class="snake"></div> -->
+
+      <div class="health-container">
+  <div class="health-bar">
+    <div class="health-fill" id="healthFill"></div>
+    <span class="health-text" id="healthText">100 / 100</span>
+  </div>
+</div>
       <header>
         <nav>
           <!-- <button id="settingsBtn" onclick="settingsButton()">
@@ -42,7 +49,7 @@
           </li>
           <li>
             <label class="anti-hero-checkbox">
-              <input type="checkbox" id="violinToggle" />
+              <input type="checkbox" id="violinToggle"  />
               Violin (Кнопка V)
             </label>
           </li>
@@ -169,6 +176,7 @@
       <script src="index.js"></script>
       <script src="snake.js"></script>
       <script src="sounds.js"></script>
+      <script src="gameplay.js"></script>
       <!-- <script src="news.js"></script> -->
       <script src="lyrics.js"></script>
     </body>

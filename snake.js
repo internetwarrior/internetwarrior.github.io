@@ -4,8 +4,8 @@ const snake = [];
 const heroParent = hero.parentElement;
 
 for (let i = 0; i < segments; i++) {
-  const div = document.createElement("div");
-  div.className = "segment";
+  const div = document.createElement('div');
+  div.className = 'segment';
 
   heroParent.appendChild(div); // same level as hero
 
@@ -19,36 +19,36 @@ let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 let snakeActive = false;
 
-const snakeCheckbox = document.getElementById("violinToggle");
+const snakeCheckbox = document.getElementById('violinToggle');
 
-document.addEventListener("mousemove", (e) => {
+document.addEventListener('mousemove', e => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 });
 
 // Toggle snake with V key
-document.addEventListener("keydown", (e) => {
-  if (e.code === "KeyV") {
+document.addEventListener('keydown', e => {
+  if (e.code === 'KeyV') {
     snakeActive = !snakeActive;
-    snake.forEach((s) => (s.el.style.opacity = snakeActive ? "1" : "0"));
+    snake.forEach(s => (s.el.style.opacity = snakeActive ? '1' : '0'));
     snakeCheckbox.checked = snakeActive;
   }
 });
 
 // Toggle snake with checkbox
-snakeCheckbox.addEventListener("change", () => {
+snakeCheckbox.addEventListener('change', () => {
   snakeActive = snakeCheckbox.checked;
-  snake.forEach((s) => (s.el.style.opacity = snakeActive ? "1" : "0"));
+  snake.forEach(s => (s.el.style.opacity = snakeActive ? '1' : '0'));
 });
 
 // --- Violin Animation ---
-const violinCheckbox = document.getElementById("violinToggle");
+const violinCheckbox = document.getElementById('violinToggle');
 let violinActive = false;
 
-violinCheckbox.addEventListener("change", () => {
+violinCheckbox.addEventListener('change', () => {
   violinActive = violinCheckbox.checked;
   // Add your violin animation logic here
-  console.log("Violin animation:", violinActive);
+  console.log('Violin animation:', violinActive);
 });
 
 function animateSnake() {
@@ -59,8 +59,8 @@ function animateSnake() {
     segment.x += (targetX - segment.x) * 0.3;
     segment.y += (targetY - segment.y) * 0.3;
 
-    segment.el.style.left = segment.x + "px";
-    segment.el.style.top = segment.y + "px";
+    segment.el.style.left = segment.x + 'px';
+    segment.el.style.top = segment.y + 'px';
 
     targetX = segment.x;
     targetY = segment.y;
