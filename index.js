@@ -85,7 +85,7 @@ const model = document.getElementById('model');
 const swear = document.getElementById('swear');
 const backgroundElement = document.getElementById('background');
 
-const healthContainerIndex = document.querySelector('.health-container');
+const healthContainerIndex = document.querySelector('.health-bar');
 const targetContainerIndext = document.querySelector('.target');
 
 //letter-settings
@@ -272,11 +272,12 @@ document.addEventListener('mousemove', e => {
     bg.style.transform = `translate(${x * -20}px, ${y * -20}px) scale(0.95)`;
     antiHero.style.transform = `translate(${x * 80}px, ${y * 80}px)`;
     hero.style.transform = `translate(${x * -120}px, ${y * -40}px)`;
-    building.style.transform = `translate(${x * -50}px, ${y * -50}px)`; // Parallax for building
+    building.style.transform = `translate(${x * 80}px, ${y * 80}px)`; // Parallax for building
   } else {
     // Regular mode transformations
     bg.style.transform = `translate(${x * -30}px, ${y * -30}px) scale(1.05)`;
     hero.style.transform = `translate(${x * heroParalaxSpeed.x}px, ${y * heroParalaxSpeed.y}px)`;
+    healthContainerIndex.style.transform = `translate(${x * -5}px, ${y * -5}px)`;
 
     antiHero.style.transform = `translate(${x * -120}px, ${y * -60}px)`;
     building.style.transform = `translate(${x * 40}px, ${y * 20}px)`; // Parallax for building
@@ -321,6 +322,8 @@ function processArrayBuffer(arrayBuffer) {
 function moveToTop() {
   healthContainerIndex.style.display = 'block';
   is_started = true;
+
+  setTimeout(() => spawnTarget(), 1000);
 
   const buildings = document.getElementById('buildings');
   buildings.style.transition = `bottom ${'1s'}  ease-in-out`;

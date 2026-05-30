@@ -5,18 +5,31 @@ const CLICK_TIME = 3000;
 const MAX_HEALTH = 100;
 let health = MAX_HEALTH;
 
-const MOVE_DISTANCE = 30; // how far it moves per click
+const MOVE_DISTANCE = 60; // how far it moves per click
 const RANDOMNESS = true; // optional randomness toggle
 
 const healthFill = document.getElementById('healthFill');
 const healthText = document.getElementById('healthText');
 const healthContainer = document.querySelector('.health-container');
 
+const antiHeroGameplay = document.getElementById('anti-hero');
+
 function updateHealth() {
   if (GAME_OVER) return;
 
   healthFill.style.width = `${(health / MAX_HEALTH) * 100}%`;
   healthText.textContent = `${health} / ${MAX_HEALTH}`;
+}
+
+function flashDamage() {
+  if (!antiHeroGameplay) return;
+
+  antiHeroGameplay.classList.add('damage');
+
+  setTimeout(() => {
+    antiHeroGameplay.classList.remove('damage');
+  }, 200);
+  // alert('hello');
 }
 
 function endGame() {
@@ -39,6 +52,13 @@ function spawnTarget() {
   const target = document.createElement('div');
   target.className = 'target';
 
+  target.innerHTML = `
+    <div class="logo">
+      <img src="./assets/images/svg/loading.svg" class="spin" alt="">
+      <img src="./assets/images/svg/loading_2.svg" class="spin-reverse" alt="">
+    </div>
+  `;
+
   if (is_started) {
     target.style.display = 'block';
   }
@@ -57,6 +77,7 @@ function spawnTarget() {
 
     health = Math.max(0, health - 1);
     updateHealth();
+    flashDamage();
 
     const rect = target.getBoundingClientRect();
 
@@ -111,4 +132,4 @@ function scheduleNextTarget() {
 }
 
 updateHealth();
-spawnTarget();
+// spawnTarget();
