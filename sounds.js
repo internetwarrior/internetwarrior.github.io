@@ -1,12 +1,12 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let buffer;
 let volume = 1;
-let particleColor = "255,0,0"; // RGB format
-particleColor = "50,255,255"; // cyan 💥
+let particleColor = '255,0,0'; // RGB format
+particleColor = '50,255,255'; // cyan 💥
 // particleColor = ""; // cyan 💥
 
 async function loadSound() {
-  const res = await fetch("assets/sounds/water_drop.mp3");
+  const res = await fetch('assets/sounds/water_drop.mp3');
   const arrayBuffer = await res.arrayBuffer();
   buffer = await audioContext.decodeAudioData(arrayBuffer);
 }
@@ -33,23 +33,23 @@ let animationId = null;
 function createCanvas() {
   if (canvas) return;
 
-  canvas = document.createElement("canvas");
+  canvas = document.createElement('canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  canvas.style.position = "fixed";
+  canvas.style.position = 'fixed';
   canvas.style.top = 0;
   canvas.style.left = 0;
-  canvas.style.pointerEvents = "none";
+  canvas.style.pointerEvents = 'none';
   document.body.appendChild(canvas);
 
-  ctx = canvas.getContext("2d");
+  ctx = canvas.getContext('2d');
 }
 
 function drawHeart(x, y, size) {
-  ctx.font = size + "px serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText("💔", x, y);
+  ctx.font = size + 'px serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('💔', x, y);
 }
 
 function explode(x, y) {
@@ -71,7 +71,7 @@ function animate(centerX, centerY) {
 
   drawHeart(centerX, centerY, 90);
 
-  particles.forEach((p) => {
+  particles.forEach(p => {
     p.x += Math.cos(p.angle) * p.speed;
     p.y += Math.sin(p.angle) * p.speed;
     p.life--;
@@ -82,7 +82,7 @@ function animate(centerX, centerY) {
     ctx.fill();
   });
 
-  particles = particles.filter((p) => p.life > 0);
+  particles = particles.filter(p => p.life > 0);
 
   if (particles.length > 0) {
     animationId = requestAnimationFrame(() => animate(centerX, centerY));
@@ -92,7 +92,7 @@ function animate(centerX, centerY) {
 }
 
 function waterDrop() {
-  if (audioContext.state === "suspended") {
+  if (audioContext.state === 'suspended') {
     audioContext.resume();
   }
 
@@ -111,8 +111,8 @@ function waterDrop() {
   animate(centerX, centerY);
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "d") {
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === 'd') {
     waterDrop();
   }
 });

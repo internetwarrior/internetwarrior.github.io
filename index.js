@@ -8,24 +8,22 @@ const VERSION = '0.8.0'; // The begining
 
 let is_started = false;
 
-//hero-settings
-// const heroPositionBoosterX = 0.8;
-// const heroPositionBoosterY = 0.8;
-
 //Hero settings
 const heroParalaxSpeed = {
   x: 80, //px
   y: 10, //px
-}; // default X position -> 60 px
-//default Y position -> 30 px
+};
 
 //resource
 const THE_QUESTION_MARK_LINK =
   'https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1';
 
 //setting-variables
-const VOLUME = 0.15; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME = 0; // 0.2 is defualt ->0.5 -> 1.0
 const VOLUME_BACKGROUN = 0.6;
+
+let currentSongIndex = 0;
+let source;
 
 // Other Volume Settings.
 const backgroudVolume = VOLUME * VOLUME_BACKGROUN;
@@ -34,45 +32,25 @@ const fadeDuration = 2;
 
 let speed = 40; //30 is default -> 60 -> 40 -> 35
 
-//speed-variables
 let snowSpeed = 15; //snow-setting 20 is default -> 10 -> 20
 
-//conditional-variables
 const isCanvasFlipped = false;
 const isChangeColor = true;
 const isDefaultAnimation = false;
 const AntiHeroAnimation = false;
 const isCanFlip = true;
 
-//setting-color
 const COLOR_OBJ = {
   color_1: 250, // Red //250 -> 0 ->250
   color_2: 250, // Green //250 -> 55->47 -> 250
   color_3: 250, // Blue //250 ->255 -> 250
 };
 
-// default X position -> 60 px
-//default Y position -> 60 px
-
-//Anti-hero settings
-
-//theme-song-settings
-let songs = [
-  'MONTAGEM-ALQUIMIA.mp3',
-  'Amirchik - Amirchik  Eto lubov Cinta Ini Official_instrumental.mp3',
-  'Amirchik - Amirchik  Eto lubov Cinta Ini Official.mp3',
-  'Jax 0214 - bat ele unutam.mp3',
-  'MONTAGEM RUGADA.m4a',
-  'Odnogo Tatyana Kurtukova.mp3',
-  // "MONTAGEM XONADA.m4a",
-  // "MVSTERIOUS, bear bear  friends  VILLAGE FUNK.m4a",
-  // "MVSTERIOUS, Hxmr, yngastrobeatz, EVO  SLAVA FUNK.mp3",
-];
+let songs = ['MONTAGEM-ALQUIMIA.mp3', 'REVENGE.mp3'];
 
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 song_name = songs[0];
 
-//imported elements
 const bodyElement = document.querySelector('body');
 const heroElement = document.getElementById('hero');
 const bg = document.getElementById('background');
@@ -372,7 +350,7 @@ async function loadDefaultAudio() {
   startElement.style.opacity = '0';
   setTimeout(() => (startElement.style.display = 'none'), 300);
 
-  const response = await fetch(`./assets/song/${song_name}`);
+  const response = await fetch(`./assets/song/${songs[currentSongIndex]}`);
   // const response = await fetch("./song_2.mp3");
   const arrayBuffer = await response.arrayBuffer();
   processArrayBuffer(arrayBuffer);
@@ -392,7 +370,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
   const frequencyBufferLength = analyser.frequencyBinCount;
   const frequencyData = new Uint8Array(frequencyBufferLength);
 
-  const source = audioContext.createBufferSource();
+  source = audioContext.createBufferSource();
   source.buffer = audioBuffer;
 
   source.connect(gainNode);
@@ -400,6 +378,20 @@ function visualize(audioBuffer, audioContext, gainNode) {
   analyser.connect(audioContext.destination);
 
   source.start();
+
+  source.onended = async () => {
+    currentSongIndex++;
+
+    if (currentSongIndex >= songs.length) {
+      currentSongIndex = 0;
+    }
+
+    const response = await fetch(`./assets/song/${songs[currentSongIndex]}`);
+
+    const arrayBuffer = await response.arrayBuffer();
+
+    processArrayBuffer(arrayBuffer);
+  };
 
   const canvasContext = canvas.getContext('2d');
   const barWidth = canvas.width / frequencyBufferLength;
