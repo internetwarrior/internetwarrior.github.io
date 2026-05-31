@@ -19,7 +19,7 @@ const THE_QUESTION_MARK_LINK =
   'https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1';
 
 //setting-variables
-const VOLUME = 0; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME = 0.15; // 0.2 is defualt ->0.5 -> 1.0
 const VOLUME_BACKGROUN = 0.6;
 
 let currentSongIndex = 0;
