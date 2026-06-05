@@ -19,7 +19,7 @@ const THE_QUESTION_MARK_LINK =
   "https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1";
 
 //setting-variables
-const VOLUME = 0.15; // 0.2 is defualt ->0.5 -> 1.0
+const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
 const VOLUME_BACKGROUN = 0.6;
 
 let currentSongIndex = 0;
@@ -46,7 +46,11 @@ const COLOR_OBJ = {
   color_3: 250, // Blue //250 ->255 -> 250
 };
 
-let songs = ["MONTAGEM-ALQUIMIA.mp3", "REVENGE.mp3"];
+let songs = [
+  "LUZ ROJA (EXTENDED) — Super Slowed + Reverb _ Best Version.mp3",
+  "MONTAGEM-ALQUIMIA.mp3",
+  "REVENGE.mp3",
+];
 
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 song_name = songs[0];
