@@ -4,7 +4,7 @@
 // Thanks for attention! Fork the code, thanks :thumbs-up
 // Good luck with yor coding
 
-const VERSION = '0.8.0'; // The begining
+const VERSION = "0.8.0"; // The begining
 
 let is_started = false;
 
@@ -16,7 +16,7 @@ const heroParalaxSpeed = {
 
 //resource
 const THE_QUESTION_MARK_LINK =
-  'https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1';
+  "https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1";
 
 //setting-variables
 const VOLUME = 0.15; // 0.2 is defualt ->0.5 -> 1.0
@@ -46,41 +46,41 @@ const COLOR_OBJ = {
   color_3: 250, // Blue //250 ->255 -> 250
 };
 
-let songs = ['MONTAGEM-ALQUIMIA.mp3', 'REVENGE.mp3'];
+let songs = ["MONTAGEM-ALQUIMIA.mp3", "REVENGE.mp3"];
 
 let song_name = songs.length > 0 ? songs[songs.length - songs.length] : null;
 song_name = songs[0];
 
-const bodyElement = document.querySelector('body');
-const heroElement = document.getElementById('hero');
-const bg = document.getElementById('background');
-const hero = document.getElementById('hero');
-const antiHero = document.getElementById('anti-hero');
-const building = document.getElementById('buildings');
-const checkbox = document.querySelector('.anti-hero-checkbox input');
+const bodyElement = document.querySelector("body");
+const heroElement = document.getElementById("hero");
+const bg = document.getElementById("background");
+const hero = document.getElementById("hero");
+const antiHero = document.getElementById("anti-hero");
+const building = document.getElementById("buildings");
+const checkbox = document.querySelector(".anti-hero-checkbox input");
 
-const model = document.getElementById('model');
-const swear = document.getElementById('swear');
-const backgroundElement = document.getElementById('background');
+const model = document.getElementById("model");
+const swear = document.getElementById("swear");
+const backgroundElement = document.getElementById("background");
 
-const healthContainerIndex = document.querySelector('.health-bar');
-const targetContainerIndext = document.querySelector('.target');
+const healthContainerIndex = document.querySelector(".health-bar");
+const targetContainerIndext = document.querySelector(".target");
 
 //letter-settings
-let WORD_STORAGE = ['-Привет', '-Как дела?', '-Давай, до свидание'];
-let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let WORD_STORAGE = ["-Привет", "-Как дела?", "-Давай, до свидание"];
+let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 //others
 const swearWords = WORD_STORAGE[0]; //"а, ты кто!?";
-const UNHOVER_TEXT = 'упс...';
+const UNHOVER_TEXT = "упс...";
 
 // antiHero.classList.add("hidden");
 swear.innerText = swearWords;
 
 const hints = [
-  'Победы главного босса!',
-  'Нажми на CTRL + на кнопку обновить ↻ для чистки кеша',
-  'Не забудь f11 для вайба',
+  "Победы главного босса!",
+  "Нажми на CTRL + на кнопку обновить ↻ для чистки кеша",
+  "Не забудь f11 для вайба",
   // song_name,
 ];
 
@@ -106,7 +106,7 @@ IS_PLAYING = false;
 IS_FIRST_CLICK = true;
 
 //randomizer <- For the future updates
-const getRandomNumberByGivenAttribute = giveNumber => {
+const getRandomNumberByGivenAttribute = (giveNumber) => {
   return Math.floor(Math.random() * giveNumber);
 };
 
@@ -115,7 +115,7 @@ let interval = 1;
 //native-conditions
 
 if (isCanvasFlipped) {
-  document.querySelector('#canvas').classList.toggle('flip-y');
+  document.querySelector("#canvas").classList.toggle("flip-y");
 }
 
 if (AntiHeroAnimation) {
@@ -124,7 +124,7 @@ if (AntiHeroAnimation) {
 
 //hint-function
 
-document.querySelector('.hint').innerText =
+document.querySelector(".hint").innerText =
   hints[Math.floor(Math.random() * hints.length)];
 
 let theLastHint = null;
@@ -132,12 +132,12 @@ const HINT_TIMER_TIME = 3_000;
 
 setInterval(() => {
   let theRandomHint = Math.floor(Math.random() * hints.length);
-  let theHintElement = document.querySelector('.hint');
+  let theHintElement = document.querySelector(".hint");
 
   if (theLastHint === theRandomHint) {
-    theHintElement.innerText = 'Loading...';
+    theHintElement.innerText = "Loading...";
     theLastHint = null;
-    console.log('while loading:', theRandomHint);
+    console.log("while loading:", theRandomHint);
   } else {
     theHintElement.innerText = hints[theRandomHint];
     theLastHint = theRandomHint;
@@ -146,15 +146,15 @@ setInterval(() => {
 
 //keydowns
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'i') {
+document.addEventListener("keydown", (e) => {
+  if (e.key === "i") {
     // Press 'i' to toggle inverse mode
     inverse = !inverse;
   }
 });
 
 // Add an event listener for the 'keydown' event on the document
-document.addEventListener('keydown', exitFullScreenOnEscape);
+document.addEventListener("keydown", exitFullScreenOnEscape);
 
 // Function to apply the background color from COLOR_OBJ
 function applyBackgroundColor() {
@@ -163,35 +163,35 @@ function applyBackgroundColor() {
 }
 
 if (bodyElement) {
-  bodyElement.addEventListener('click', function () {
+  bodyElement.addEventListener("click", function () {
     if (IS_FIRST_CLICK) {
       IS_FIRST_CLICK = false;
       return;
     }
 
     if (!inverseMouseButtons) {
-      console.log('Left-clicked');
+      console.log("Left-clicked");
       bodyElement.style.backgroundColor = getRandomColor((leftButton = true));
     } else {
-      console.log('Right-clicked (inverted)');
+      console.log("Right-clicked (inverted)");
 
-      document.querySelector('#canvas').classList.toggle('flip-y');
+      document.querySelector("#canvas").classList.toggle("flip-y");
       bodyElement.style.backgroundColor = getRandomColor((leftButton = true));
     }
   });
 
-  bodyElement.addEventListener('contextmenu', function (event) {
+  bodyElement.addEventListener("contextmenu", function (event) {
     event.preventDefault();
 
     if (!inverseMouseButtons) {
-      console.log('Right-clicked');
+      console.log("Right-clicked");
       if (isCanFlip) {
-        document.querySelector('#canvas').classList.toggle('flip-y');
+        document.querySelector("#canvas").classList.toggle("flip-y");
       }
 
       bodyElement.style.backgroundColor = getRandomColor();
     } else {
-      console.log('Left-clicked (inverted)');
+      console.log("Left-clicked (inverted)");
 
       return;
       bodyElement.style.backgroundColor = getRandomColor();
@@ -217,7 +217,7 @@ function getRandomContent() {
 }
 
 function exitFullScreenOnEscape(event) {
-  if (event.key === 'Escape') {
+  if (event.key === "Escape") {
     // Check if the document is currently in full-screen mode
     if (document.fullscreenElement) {
       // Exit full screen if it's active
@@ -238,11 +238,14 @@ function exitFullScreenOnEscape(event) {
 }
 
 function settingsButton() {
-  alert('Soon! SETTINGS-BUTTON');
+  alert("Soon! SETTINGS-BUTTON");
 }
-document.addEventListener('mousemove', e => {
+document.addEventListener("mousemove", (e) => {
   const x = e.clientX / window.innerWidth - 0.5;
   const y = e.clientY / window.innerHeight - 0.5;
+
+  mx = e.clientX / window.innerWidth - 0.5;
+  my = e.clientY / window.innerHeight - 0.5;
 
   //hero-settings
   if (inverse) {
@@ -267,7 +270,7 @@ function processArrayBuffer(arrayBuffer) {
   const gainNode = audioContext.createGain();
   gainNode.gain.value = originalVolume;
 
-  audioContext.decodeAudioData(arrayBuffer, audioBuffer => {
+  audioContext.decodeAudioData(arrayBuffer, (audioBuffer) => {
     visualize(audioBuffer, audioContext, gainNode);
   });
 
@@ -277,7 +280,7 @@ function processArrayBuffer(arrayBuffer) {
     gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
     gainNode.gain.linearRampToValueAtTime(
       backgroudVolume,
-      currentTime + fadeDuration
+      currentTime + fadeDuration,
     );
   }
 
@@ -287,53 +290,53 @@ function processArrayBuffer(arrayBuffer) {
     gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
     gainNode.gain.linearRampToValueAtTime(
       originalVolume,
-      currentTime + fadeDuration
+      currentTime + fadeDuration,
     );
   }
 
   // Listen for window focus and blur events
-  window.addEventListener('blur', fadeToZero); // When window loses focus, fade to 0
-  window.addEventListener('focus', restoreVolume); // When window gains focus, restore volume
+  window.addEventListener("blur", fadeToZero); // When window loses focus, fade to 0
+  window.addEventListener("focus", restoreVolume); // When window gains focus, restore volume
 }
 
 // on-start-fucntion
 function moveToTop() {
-  healthContainerIndex.style.display = 'block';
+  healthContainerIndex.style.display = "block";
   is_started = true;
 
   setTimeout(() => spawnTarget(), 1000);
 
-  const buildings = document.getElementById('buildings');
-  buildings.style.transition = `bottom ${'1s'}  ease-in-out`;
-  antiHero.style.transition = 'top 2s  ease-in-out'; // Ensure smooth transition
+  const buildings = document.getElementById("buildings");
+  buildings.style.transition = `bottom ${"1s"}  ease-in-out`;
+  antiHero.style.transition = "top 2s  ease-in-out"; // Ensure smooth transition
   if (AntiHeroAnimation) {
-    antiHero.style.animation = 'floating-2 4000ms infinite ease alternate';
+    antiHero.style.animation = "floating-2 4000ms infinite ease alternate";
   }
-  lyrics.style.opacity = '1';
+  lyrics.style.opacity = "1";
   if (song_name !== songs[3]) {
-    antiHero.style.top = '-5%'; // Move the element to the top
-    buildings.style.bottom = '0%'; // Move the element to the top
+    antiHero.style.top = "-5%"; // Move the element to the top
+    buildings.style.bottom = "0%"; // Move the element to the top
   } else {
     WORD_STORAGE = wish_to_say_and_get;
     speed = 100;
   } // Ensure smooth transition
 }
 
-checkbox.addEventListener('change', () => {
+checkbox.addEventListener("change", () => {
   antiHero.style.animation = checkbox.checked
-    ? 'floating-2 4000ms infinite ease alternate'
-    : 'none';
+    ? "floating-2 4000ms infinite ease alternate"
+    : "none";
   // hero.style.animation = checkbox.checked
   //   ? "floating-2 4000ms infinite ease alternate"
   //   : "none";
 });
 
 async function loadDefaultAudio() {
-  hero.style.animation = 'none';
+  hero.style.animation = "none";
   if (IS_PLAYING) return;
   moveToTop();
 
-  model.style.opacity = '1';
+  model.style.opacity = "1";
 
   // backgroundElement.style.filter =
   //   'hue-rotate(270deg) saturate(200%) brightness(110%)';
@@ -341,14 +344,14 @@ async function loadDefaultAudio() {
   // heroElement.style.filter =
   //   'hue-rotate(270deg) saturate(200%) brightness(110%)';
 
-  backgroundElement.style.opacity = '0.5';
+  backgroundElement.style.opacity = "0.5";
 
   swear.style.animation =
-    'borderDisappear var( --animation-duration) forwards ease-out';
+    "borderDisappear var( --animation-duration) forwards ease-out";
 
-  const startElement = document.getElementById('start');
-  startElement.style.opacity = '0';
-  setTimeout(() => (startElement.style.display = 'none'), 300);
+  const startElement = document.getElementById("start");
+  startElement.style.opacity = "0";
+  setTimeout(() => (startElement.style.display = "none"), 300);
 
   const response = await fetch(`./assets/song/${songs[currentSongIndex]}`);
   // const response = await fetch("./song_2.mp3");
@@ -357,10 +360,15 @@ async function loadDefaultAudio() {
   IS_PLAYING = true;
 }
 
-document.getElementById('start').addEventListener('click', loadDefaultAudio);
+let mx = 0;
+let my = 0;
+
+document.addEventListener("mousemove", (e) => {});
+
+document.getElementById("start").addEventListener("click", loadDefaultAudio);
 
 function visualize(audioBuffer, audioContext, gainNode) {
-  const canvas = document.getElementById('canvas');
+  const canvas = document.getElementById("canvas");
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 
@@ -369,6 +377,31 @@ function visualize(audioBuffer, audioContext, gainNode) {
 
   const frequencyBufferLength = analyser.frequencyBinCount;
   const frequencyData = new Uint8Array(frequencyBufferLength);
+
+  function animateBassScale() {
+    requestAnimationFrame(animateBassScale);
+
+    analyser.getByteFrequencyData(frequencyData);
+
+    let bass = 0;
+    const bassRange = 100; // lower frequencies
+
+    for (let i = 0; i < bassRange; i++) {
+      bass += frequencyData[i];
+    }
+
+    bass /= bassRange;
+    bass /= 255;
+
+    const scale = 1 + bass * 0.1; // max +15%
+    const heroScale = 1 + bass * 0.2; // max +15%
+
+    document.body.style.transform = `scale(${scale})`;
+    hero.style.transform = `scale(${heroScale})`;
+    document.body.style.transformOrigin = "center center";
+  }
+
+  animateBassScale();
 
   source = audioContext.createBufferSource();
   source.buffer = audioBuffer;
@@ -393,7 +426,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
     processArrayBuffer(arrayBuffer);
   };
 
-  const canvasContext = canvas.getContext('2d');
+  const canvasContext = canvas.getContext("2d");
   const barWidth = canvas.width / frequencyBufferLength;
   const midX = canvas.width / 1;
   const midX_2 = canvas.width / 2;
@@ -408,7 +441,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
       const value = frequencyData[i];
 
       const color =
-        'rgb(' +
+        "rgb(" +
         (COLOR_OBJ.color_1 + value) +
         `,${COLOR_OBJ.color_2}, ${COLOR_OBJ.color_3})`;
 
@@ -419,7 +452,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
         rightX,
         canvas.height - value / 1.2,
         barWidth - BAR_WIDTH,
-        value
+        value,
       );
 
       const leftX = midX_2 - i * barWidth;
@@ -427,7 +460,7 @@ function visualize(audioBuffer, audioContext, gainNode) {
         leftX,
         canvas.height - value / 1.2,
         barWidth - BAR_WIDTH,
-        value
+        value,
       );
     }
   }
@@ -436,8 +469,8 @@ function visualize(audioBuffer, audioContext, gainNode) {
 }
 
 //argument-function
-const el = document.querySelector('.swear');
-el.addEventListener('mouseover', event => {
+const el = document.querySelector(".swear");
+el.addEventListener("mouseover", (event) => {
   let iteration = 0;
   let length = 0;
   clearInterval(interval);
@@ -445,27 +478,27 @@ el.addEventListener('mouseover', event => {
   // Start interval to keep changing letters
   interval = setInterval(() => {
     event.target.innerText = event.target.innerText
-      .split('')
+      .split("")
       .map((letter, index) => {
         // Keep replacing the letters with random ones
         return letters[Math.floor(Math.random() * 26)];
       })
-      .join(''); // Keep randomizing the text
+      .join(""); // Keep randomizing the text
 
     // Optionally, you can limit the number of iterations for how many times the text should update
     iteration += 1 / 3 + length;
   }, speed);
 });
 
-el.addEventListener('mouseleave', event => {
+el.addEventListener("mouseleave", (event) => {
   clearInterval(interval);
   event.target.innerText =
     WORD_STORAGE[Math.floor(Math.random() * WORD_STORAGE.length)]; // вернуть нормальный текст
 });
 
 window.onload = function () {
-  var canvas = document.getElementById('canvas-2');
-  var ctx = canvas.getContext('2d');
+  var canvas = document.getElementById("canvas-2");
+  var ctx = canvas.getContext("2d");
 
   var W = window.innerWidth;
   var H = window.innerHeight;
@@ -488,7 +521,7 @@ window.onload = function () {
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    ctx.strokeStyle = 'rgba(173,216,230,0.6)';
+    ctx.strokeStyle = "rgba(173,216,230,0.6)";
     ctx.lineWidth = 1;
     ctx.beginPath();
 
@@ -527,31 +560,31 @@ let start = Date.now();
 let stayedLongEnough = false;
 const intervalCheck = 10_000;
 
-document.getElementById('ytBtn').onclick = () => {
-  window.open(getRandomContent(), '_blank');
+document.getElementById("ytBtn").onclick = () => {
+  window.open(getRandomContent(), "_blank");
 };
-document.querySelectorAll('.version').forEach(el => {
-  el.innerText = '(' + VERSION + ')';
+document.querySelectorAll(".version").forEach((el) => {
+  el.innerText = "(" + VERSION + ")";
 });
 
-const lightning = document.querySelector('.lightning');
+const lightning = document.querySelector(".lightning");
 
 function createLightning() {
-  const bolt = document.createElement('div');
+  const bolt = document.createElement("div");
 
-  bolt.classList.add('bolt');
+  bolt.classList.add("bolt");
 
-  bolt.style.left = Math.random() * window.innerWidth + 'px';
+  bolt.style.left = Math.random() * window.innerWidth + "px";
 
   const rotate = Math.random() * 40 - 20;
   bolt.style.transform = `rotate(${rotate}deg)`;
 
   lightning.appendChild(bolt);
 
-  document.body.classList.add('flash');
+  document.body.classList.add("flash");
 
   setTimeout(() => {
-    document.body.classList.remove('flash');
+    document.body.classList.remove("flash");
   }, 500);
 
   setTimeout(() => {
@@ -563,5 +596,5 @@ setInterval(
   () => {
     createLightning();
   },
-  Math.random() * 4000 + 2000
+  Math.random() * 4000 + 2000,
 );
