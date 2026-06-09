@@ -72,7 +72,14 @@
               Previous line
               (Кнопка Shift + Пробел)
           </li>
-          
+          <li>
+            <input type="url" id="heroInput" placeholder="Hero image URL">
+<input type="url" id="backgroundInput" placeholder="Background image URL">
+<input type="url" id="antiHeroInput" placeholder="Anti-hero image URL">
+<button style="color: white; font-weight: 700;" onclick="localStorage.clear(); location.reload();">
+  Reset
+</button>
+          </li>
         </ul>
       </div>
 
@@ -82,6 +89,16 @@
         </div>
 
         <img src="./assets/images/png/bg-removed.png" id="background" />
+       <!-- <video
+  src="./assets/video/background.mp4"
+  id="background"
+  autoplay
+  loop
+  muted
+  playsinline
+></video> -->
+        
+
         <div id="anti-hero" class="">
           <img src="./assets/images/png/anti-hero-6.png" />
         </div>
@@ -145,41 +162,12 @@
 
       <canvas id="canvas-2"></canvas>
 
-      <!-- <div
-        id="keyDisplay"
-        style="
-          position: fixed;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(0, 0, 0, 0.7);
-          color: white;
-          padding: 10px 20px;
-          border-radius: 8px;
-          font-size: 24px;
-          display: none;
-          z-index: 1000;
-        "
-      ></div>
-
-      <script>
-        const keyDisplay = document.getElementById("keyDisplay");
-        let timeout;
-
-        document.addEventListener("keydown", (e) => {
-          keyDisplay.innerText = `${e.key.toUpperCase()}`;
-          keyDisplay.style.display = "block";
-
-          clearTimeout(timeout);
-          timeout = setTimeout(() => {
-            keyDisplay.style.display = "none";
-          }, 1000);
-        });
-      </script> -->
+    
 
       <script src="index.js"></script>
       <script src="snake.js"></script>
       <script src="sounds.js"></script>
+      <script src="backgroundChange.js"></script>
       <script src="gameplay.js"></script>
       <!-- <script src="news.js"></script> -->
       <script src="lyrics.js"></script>

@@ -71,6 +71,10 @@
   animation: heroDown 1s ease-in-out forwards !important;
 }
 
+#hero {
+  scale: 0.9 !important;
+}
+
 .snow,
 #hero,
 img,
@@ -405,7 +409,7 @@ header a {
 }
 
 #background {
-  scale: 1.05;
+  scale: 1;
 }
 
 #anti-hero img {
@@ -741,4 +745,31 @@ ul li {
   filter: drop-shadow(0 0 20px red) brightness(1.6) saturate(0.9);
   transform: scale(1.02);
   transition: 0.1s;
+}
+
+input[type='url'] {
+  width: 250px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.25s ease;
+  backdrop-filter: blur(10px);
+}
+
+input[type='url']::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+input[type='url']:focus {
+  border-color: rgba(0, 140, 255, 0.8);
+  box-shadow: 0 0 0 3px rgba(0, 140, 255, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+input[type='url']:hover {
+  border-color: rgba(255, 255, 255, 0.25);
 }
