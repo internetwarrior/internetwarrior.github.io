@@ -8,6 +8,8 @@ const VERSION = '0.8.0'; // The begining
 
 let is_started = false;
 
+let globalGainNode = null;
+
 //Hero settings
 const heroParalaxSpeed = {
   x: 80, //px
@@ -19,16 +21,38 @@ const THE_QUESTION_MARK_LINK =
   'https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1';
 
 //setting-variables
-const VOLUME = 0.3; // 0.2 is defualt ->0.5 -> 1.0
-const VOLUME_BACKGROUN = 0.6;
+let VOLUME = Number(localStorage.getItem('volume') || 30) / 100;
+const VOLUME_BACKGROUN = 0.3;
 
 let currentSongIndex = 0;
 let source;
 
 // Other Volume Settings.
-const backgroudVolume = VOLUME * VOLUME_BACKGROUN;
-const originalVolume = VOLUME;
+let backgroudVolume = VOLUME * VOLUME_BACKGROUN;
+let originalVolume = VOLUME;
 const fadeDuration = 2;
+
+const volumeInput = document.getElementById('volumeInput');
+const volumeValue = document.getElementById('volumeValue');
+
+const savedVolume = localStorage.getItem('volume') || 30;
+
+volumeInput.value = savedVolume;
+volumeValue.textContent = `${savedVolume}%`;
+
+volumeInput.addEventListener('input', () => {
+  const volume = Number(volumeInput.value) / 100;
+
+  volumeValue.textContent = `${volumeInput.value}%`;
+  localStorage.setItem('volume', volumeInput.value);
+
+  if (globalGainNode) {
+    globalGainNode.gain.setValueAtTime(
+      volume,
+      globalGainNode.context.currentTime
+    );
+  }
+});
 
 let speed = 40; //30 is default -> 60 -> 40 -> 35
 
@@ -273,7 +297,9 @@ document.addEventListener('mousemove', e => {
 function processArrayBuffer(arrayBuffer) {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
   const gainNode = audioContext.createGain();
-  gainNode.gain.value = originalVolume;
+  globalGainNode = gainNode;
+
+  gainNode.gain.value = Number(localStorage.getItem('volume') || 30) / 100;
 
   audioContext.decodeAudioData(arrayBuffer, audioBuffer => {
     visualize(audioBuffer, audioContext, gainNode);

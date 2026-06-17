@@ -1,5 +1,5 @@
 // --- Snake ---
-const segments = 60;
+const segments = 30;
 const snake = [];
 const heroParent = hero.parentElement;
 
