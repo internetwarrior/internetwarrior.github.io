@@ -18,7 +18,7 @@
 
       <!-- <div class="snake"></div> -->
 
-      <div class="health-container">
+      <div class="health-container hidden">
   <div class="health-bar">
     <div class="health-fill" id="healthFill"></div>
     <span class="health-text" id="healthText">100 / 100</span>
@@ -46,6 +46,14 @@
       <div id="settings">
         <h3>Настройки</h3>
 
+
+      
+
+        <ul>
+
+            <li style="color: white;">
+          <label for="">Громкость</label>
+        </li>
 <li class="volume-control">
 
 
@@ -59,8 +67,7 @@
 
   <span id="volumeValue">50%</span>
 </li>
-        <ul>
-          <li>
+          <li class="hidden">
             <label class="anti-hero-checkbox">
               <input type="checkbox" id="snakeToggle" />
               Анимация
@@ -69,25 +76,25 @@
           <li>
             <label class="anti-hero-checkbox">
               <input type="checkbox" id="violinToggle"  />
-              Violin (Кнопка V)
+            Snake(Змейка)
             </label>
           </li>
-          <li>
+          <li class="hidden">
             <label class="anti-hero-checkbox">
               <button onclick="waterDrop()">Water drop (Кнопка D)</button>
             </label>
           </li>
-          <li>
+         <li class="hidden">
             <label class="anti-hero-checkbox">
               Next line
               (Кнопка Пробел)
           </li>
-          <li>
+           <li class="hidden">
             <label class="anti-hero-checkbox">
               Previous line
               (Кнопка Shift + Пробел)
           </li>
-          <li>
+          <li class="hidden">
             <input type="url" id="heroInput" placeholder="Hero image URL">
 <input type="url" id="backgroundInput" placeholder="Background image URL">
 <input type="url" id="antiHeroInput" placeholder="Anti-hero image URL">
@@ -103,7 +110,8 @@
           <img src="./assets/images/png/the-woman.png" class="new-female-hero" />
         </div>
 
-        <img src="./assets/images/png/bg-removed.png" id="background" />
+        <!-- <img src="./assets/images/png/bg-removed.png" id="background" /> -->
+        <img src="./assets/images/webp/background.webp" id="background" />
        <!-- <video
   src="./assets/video/background.mp4"
   id="background"
@@ -114,10 +122,11 @@
 ></video> -->
         
 
-        <div id="anti-hero" class="">
+        <div id="anti-hero" class="hidden" style="">
           <img src="./assets/images/png/anti-hero-6.png" />
         </div>
-        <img src="./assets/images/png/the_hero.png" id="hero" />
+        <img src="./assets/images/webp/hero.webp" id="hero" />
+        <!-- <img src="./assets/images/png/the_hero.png" id="hero" /> -->
 
         <!-- <img src="./assets/images/png/snow-background.png" class="snow" /> -->
    <div class="lightning"></div>
@@ -159,7 +168,7 @@
         </div>
       </div>
 
-      <div id="model">
+      <div id="model" class="hidden ">
         <h2 class="">
           - Кто ты,
           <span id="the-warrior"

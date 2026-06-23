@@ -18,7 +18,7 @@ const heroParalaxSpeed = {
 
 //resource
 const THE_QUESTION_MARK_LINK =
-  'https://www.youtube.com/watch?v=2Ep6VmdKjGE&list=RD2Ep6VmdKjGE&start_radio=1';
+  'https://www.youtube.com/watch?v=MeamyO9UxPk&list=RDMMMeamyO9UxPk&start_radio=1';
 
 //setting-variables
 let VOLUME = Number(localStorage.getItem('volume') || 30) / 100;
@@ -71,6 +71,7 @@ const COLOR_OBJ = {
 };
 
 let songs = [
+  "theme.mp3",
   // 'cyberpunk.mp3',
   'LUZ ROJA (EXTENDED) — Super Slowed + Reverb _ Best Version.mp3',
   'MONTAGEM-ALQUIMIA.mp3',
@@ -307,23 +308,30 @@ function processArrayBuffer(arrayBuffer) {
 
   // Function to smoothly fade volume to 0
   function fadeToZero() {
-    const currentTime = audioContext.currentTime;
-    gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
-    gainNode.gain.linearRampToValueAtTime(
-      backgroudVolume,
-      currentTime + fadeDuration
-    );
-  }
+  const currentTime = audioContext.currentTime;
 
-  // Function to restore volume back to original
-  function restoreVolume() {
-    const currentTime = audioContext.currentTime;
-    gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
-    gainNode.gain.linearRampToValueAtTime(
-      originalVolume,
-      currentTime + fadeDuration
-    );
-  }
+  gainNode.gain.cancelScheduledValues(currentTime);
+  gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
+
+  gainNode.gain.linearRampToValueAtTime(
+    Number(localStorage.getItem('volume') || 30) / 100 * VOLUME_BACKGROUN,
+    currentTime + fadeDuration
+  );
+}
+
+function restoreVolume() {
+  const currentTime = audioContext.currentTime;
+
+  const volume = Number(volumeInput.value) / 100;
+
+  gainNode.gain.cancelScheduledValues(currentTime);
+  gainNode.gain.setValueAtTime(gainNode.gain.value, currentTime);
+
+  gainNode.gain.linearRampToValueAtTime(
+    volume,
+    currentTime + fadeDuration
+  );
+}
 
   // Listen for window focus and blur events
   window.addEventListener('blur', fadeToZero); // When window loses focus, fade to 0
@@ -527,6 +535,33 @@ el.addEventListener('mouseleave', event => {
     WORD_STORAGE[Math.floor(Math.random() * WORD_STORAGE.length)]; // вернуть нормальный текст
 });
 
+
+volumeInput.addEventListener('wheel', e => {
+  e.preventDefault();
+
+  const step = 5; // volume change per wheel tick
+  let value = Number(volumeInput.value);
+
+  if (e.deltaY < 0) {
+    value += step; // scroll up
+  } else {
+    value -= step; // scroll down
+  }
+
+  value = Math.max(0, Math.min(100, value));
+
+  volumeInput.value = value;
+  volumeValue.textContent = `${value}%`;
+  localStorage.setItem('volume', value);
+
+  if (globalGainNode) {
+    globalGainNode.gain.setValueAtTime(
+      value / 100,
+      globalGainNode.context.currentTime
+    );
+  }
+});
+
 window.onload = function () {
   var canvas = document.getElementById('canvas-2');
   var ctx = canvas.getContext('2d');
@@ -550,6 +585,7 @@ window.onload = function () {
   }
 
   function draw() {
+    return
     ctx.clearRect(0, 0, W, H);
 
     ctx.strokeStyle = 'rgba(173,216,230,0.6)';
@@ -601,6 +637,7 @@ document.querySelectorAll('.version').forEach(el => {
 const lightning = document.querySelector('.lightning');
 
 function createLightning() {
+  return
   const bolt = document.createElement('div');
 
   bolt.classList.add('bolt');

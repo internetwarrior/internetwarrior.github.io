@@ -1,225 +1,226 @@
-let GAME_OVER = false;
 
-let CLICK_TIME = 20_000;
-let MOVE_DISTANCE = 0; // how far it moves per click
+// let GAME_OVER = false;
 
-const MAX_HEALTH = 5_000;
-let health = MAX_HEALTH;
+// let CLICK_TIME = 20_000;
+// let MOVE_DISTANCE = 0; // how far it moves per click
 
-const RANDOMNESS = true; // optional randomness toggle
-function DIFFICULTY_CHANGE() {
-  const thresholds = [5000, 4000, 3000, 2000, 1000];
+// const MAX_HEALTH = 5_000;
+// let health = MAX_HEALTH;
 
-  let level = 0;
+// const RANDOMNESS = true; // optional randomness toggle
+// function DIFFICULTY_CHANGE() {
+//   const thresholds = [5000, 4000, 3000, 2000, 1000];
 
-  for (let i = 0; i < thresholds.length; i++) {
-    if (health <= thresholds[i]) {
-      level = i;
-    }
-  }
+//   let level = 0;
 
-  // first 1k chunk (level 0) = no movement
-  if (level === 0) {
-    MOVE_DISTANCE = 0;
-  } else {
-    MOVE_DISTANCE = 20 * level;
-  }
+//   for (let i = 0; i < thresholds.length; i++) {
+//     if (health <= thresholds[i]) {
+//       level = i;
+//     }
+//   }
 
-  const maxTime = 20_000;
-  const minTime = 3_000;
+//   // first 1k chunk (level 0) = no movement
+//   if (level === 0) {
+//     MOVE_DISTANCE = 0;
+//   } else {
+//     MOVE_DISTANCE = 20 * level;
+//   }
 
-  const progress = level / (thresholds.length - 1);
-  CLICK_TIME = Math.floor(maxTime - (maxTime - minTime) * progress);
-}
+//   const maxTime = 20_000;
+//   const minTime = 3_000;
 
-let punchBuffers = [];
-let sowrdVolume = 0.5;
+//   const progress = level / (thresholds.length - 1);
+//   CLICK_TIME = Math.floor(maxTime - (maxTime - minTime) * progress);
+// }
 
-const healthFill = document.getElementById('healthFill');
-const healthText = document.getElementById('healthText');
-const healthContainer = document.querySelector('.health-container');
+// let punchBuffers = [];
+// let sowrdVolume = 0.5;
 
-const antiHeroGameplay = document.getElementById('anti-hero');
+// const healthFill = document.getElementById('healthFill');
+// const healthText = document.getElementById('healthText');
+// const healthContainer = document.querySelector('.health-container');
 
-function updateHealth() {
-  if (GAME_OVER) return;
+// const antiHeroGameplay = document.getElementById('anti-hero');
 
-  healthFill.style.width = `${(health / MAX_HEALTH) * 100}%`;
-  healthText.textContent = `${health} / ${MAX_HEALTH} HP`;
-}
+// function updateHealth() {
+//   if (GAME_OVER) return;
 
-async function loadPunchSounds() {
-  const files = [
-    'assets/sounds/punch_1.mp3',
-    'assets/sounds/punch_2.mp3',
-    'assets/sounds/punch_3.mp3',
-    // 'assets/sounds/sword-hit.mp3',
-  ];
+//   healthFill.style.width = `${(health / MAX_HEALTH) * 100}%`;
+//   healthText.textContent = `${health} / ${MAX_HEALTH} HP`;
+// }
 
-  for (const file of files) {
-    const res = await fetch(file);
-    const arrayBuffer = await res.arrayBuffer();
-    const buffer = await audioContext.decodeAudioData(arrayBuffer);
-    punchBuffers.push(buffer);
-  }
-}
+// async function loadPunchSounds() {
+//   const files = [
+//     'assets/sounds/punch_1.mp3',
+//     'assets/sounds/punch_2.mp3',
+//     'assets/sounds/punch_3.mp3',
+//     // 'assets/sounds/sword-hit.mp3',
+//   ];
 
-loadPunchSounds();
+//   for (const file of files) {
+//     const res = await fetch(file);
+//     const arrayBuffer = await res.arrayBuffer();
+//     const buffer = await audioContext.decodeAudioData(arrayBuffer);
+//     punchBuffers.push(buffer);
+//   }
+// }
 
-function playPunchSound() {
-  if (!punchBuffers.length) return;
+// loadPunchSounds();
 
-  const source = audioContext.createBufferSource();
-  source.buffer = punchBuffers[Math.floor(Math.random() * punchBuffers.length)];
+// function playPunchSound() {
+//   if (!punchBuffers.length) return;
 
-  const gainNode = audioContext.createGain();
-  gainNode.gain.value = sowrdVolume;
+//   const source = audioContext.createBufferSource();
+//   source.buffer = punchBuffers[Math.floor(Math.random() * punchBuffers.length)];
 
-  source.connect(gainNode);
-  gainNode.connect(audioContext.destination);
+//   const gainNode = audioContext.createGain();
+//   gainNode.gain.value = sowrdVolume;
 
-  source.start(0);
-}
+//   source.connect(gainNode);
+//   gainNode.connect(audioContext.destination);
 
-function flashDamage() {
-  if (!antiHeroGameplay) return;
+//   source.start(0);
+// }
 
-  antiHeroGameplay.classList.add('damage');
+// function flashDamage() {
+//   if (!antiHeroGameplay) return;
 
-  setTimeout(() => {
-    antiHeroGameplay.classList.remove('damage');
-  }, 200);
-  // alert('hello');
-}
+//   antiHeroGameplay.classList.add('damage');
 
-function endGame() {
-  alert('Главный бой был побежден!');
-  GAME_OVER = true;
+//   setTimeout(() => {
+//     antiHeroGameplay.classList.remove('damage');
+//   }, 200);
+//   // alert('hello');
+// }
 
-  // hide health bar
-  if (healthContainer) {
-    healthContainer.style.display = 'none';
-    antiHero.style.display = 'none';
-  }
+// function endGame() {
+//   alert('Главный бой был побежден!');
+//   GAME_OVER = true;
 
-  // remove all targets
-  document.querySelectorAll('.target').forEach(t => t.remove());
-}
+//   // hide health bar
+//   if (healthContainer) {
+//     healthContainer.style.display = 'none';
+//     antiHero.style.display = 'none';
+//   }
 
-function spawnTarget() {
-  if (GAME_OVER) return;
+//   // remove all targets
+//   document.querySelectorAll('.target').forEach(t => t.remove());
+// }
 
-  const target = document.createElement('div');
-  target.className = 'target';
+// function spawnTarget() {
+//   if (GAME_OVER) return;
 
-  target.innerHTML = `
-    <div class="logo">
-      <img src="./assets/images/svg/loading.svg" class="spin" alt="">
-      <img src="./assets/images/svg/loading_2.svg" class="spin-reverse" alt="">
-    </div>
-  `;
+//   const target = document.createElement('div');
+//   target.className = 'target';
 
-  if (is_started) {
-    target.style.display = 'block';
-  }
+//   target.innerHTML = `
+//     <div class="logo">
+//       <img src="./assets/images/svg/loading.svg" class="spin" alt="">
+//       <img src="./assets/images/svg/loading_2.svg" class="spin-reverse" alt="">
+//     </div>
+//   `;
 
-  const size = 100;
-  const x = Math.random() * (window.innerWidth - size);
-  const y = Math.random() * (window.innerHeight - size);
+//   if (is_started) {
+//     target.style.display = 'block';
+//   }
 
-  target.style.left = `${x}px`;
-  target.style.top = `${y}px`;
+//   const size = 100;
+//   const x = Math.random() * (window.innerWidth - size);
+//   const y = Math.random() * (window.innerHeight - size);
 
-  document.body.appendChild(target);
+//   target.style.left = `${x}px`;
+//   target.style.top = `${y}px`;
 
-  const clickHandler = e => {
-    if (GAME_OVER) return;
+//   document.body.appendChild(target);
 
-    playPunchSound();
+//   const clickHandler = e => {
+//     if (GAME_OVER) return;
 
-    const rect = target.getBoundingClientRect();
+//     playPunchSound();
 
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+//     const rect = target.getBoundingClientRect();
 
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
+//     const clickX = e.clientX - rect.left;
+//     const clickY = e.clientY - rect.top;
 
-    const distance = Math.hypot(clickX - centerX, clickY - centerY);
+//     const centerX = rect.width / 2;
+//     const centerY = rect.height / 2;
 
-    let damage = 1;
+//     const distance = Math.hypot(clickX - centerX, clickY - centerY);
 
-    if (distance <= 20) {
-      damage = 15;
-      health = Math.max(0, health - damage);
-    } else if (distance <= 50) {
-      damage = 5;
-      health = Math.max(0, health - damage);
-    } else {
-      health = Math.min(MAX_HEALTH, health + 30);
-    }
+//     let damage = 1;
 
-    DIFFICULTY_CHANGE();
+//     if (distance <= 20) {
+//       damage = 15;
+//       health = Math.max(0, health - damage);
+//     } else if (distance <= 50) {
+//       damage = 5;
+//       health = Math.max(0, health - damage);
+//     } else {
+//       health = Math.min(MAX_HEALTH, health + 30);
+//     }
 
-    updateHealth();
-    flashDamage();
+//     DIFFICULTY_CHANGE();
 
-    let CAN_TAKE_DAMAGE_TIMES = Math.floor(Math.random() * 3) + 1;
+//     updateHealth();
+//     flashDamage();
 
-    let x = rect.left;
-    let y = rect.top;
+//     let CAN_TAKE_DAMAGE_TIMES = Math.floor(Math.random() * 3) + 1;
 
-    const dirX = RANDOMNESS
-      ? Math.random() < 0.5
-        ? -MOVE_DISTANCE
-        : MOVE_DISTANCE
-      : MOVE_DISTANCE;
+//     let x = rect.left;
+//     let y = rect.top;
 
-    const dirY = RANDOMNESS
-      ? Math.random() < 0.5
-        ? -MOVE_DISTANCE
-        : MOVE_DISTANCE
-      : MOVE_DISTANCE;
+//     const dirX = RANDOMNESS
+//       ? Math.random() < 0.5
+//         ? -MOVE_DISTANCE
+//         : MOVE_DISTANCE
+//       : MOVE_DISTANCE;
 
-    x += dirX;
-    y += dirY;
+//     const dirY = RANDOMNESS
+//       ? Math.random() < 0.5
+//         ? -MOVE_DISTANCE
+//         : MOVE_DISTANCE
+//       : MOVE_DISTANCE;
 
-    x = Math.max(0, Math.min(window.innerWidth - 150, x));
-    y = Math.max(0, Math.min(window.innerHeight - 150, y));
+//     x += dirX;
+//     y += dirY;
 
-    CAN_TAKE_DAMAGE_TIMES--;
+//     x = Math.max(0, Math.min(window.innerWidth - 150, x));
+//     y = Math.max(0, Math.min(window.innerHeight - 150, y));
 
-    if (!CAN_TAKE_DAMAGE_TIMES) {
-      target.style.left = `${x}px`;
-      target.style.top = `${y}px`;
+//     CAN_TAKE_DAMAGE_TIMES--;
 
-      CAN_TAKE_DAMAGE_TIMES = Math.floor(Math.random() * 3) + 1;
-    }
+//     if (!CAN_TAKE_DAMAGE_TIMES) {
+//       target.style.left = `${x}px`;
+//       target.style.top = `${y}px`;
 
-    if (health === 0) {
-      endGame();
-    }
-  };
+//       CAN_TAKE_DAMAGE_TIMES = Math.floor(Math.random() * 3) + 1;
+//     }
 
-  target.addEventListener('click', clickHandler);
+//     if (health === 0) {
+//       endGame();
+//     }
+//   };
 
-  setTimeout(() => {
-    target.removeEventListener('click', clickHandler);
-    if (target.isConnected) target.remove();
+//   target.addEventListener('click', clickHandler);
 
-    scheduleNextTarget();
-  }, CLICK_TIME);
-}
+//   setTimeout(() => {
+//     target.removeEventListener('click', clickHandler);
+//     if (target.isConnected) target.remove();
 
-function scheduleNextTarget() {
-  if (GAME_OVER) return;
+//     scheduleNextTarget();
+//   }, CLICK_TIME);
+// }
 
-  const delay = 2000 + Math.random() * 1000;
+// function scheduleNextTarget() {
+//   if (GAME_OVER) return;
 
-  setTimeout(() => {
-    spawnTarget();
-  }, delay);
-}
+//   const delay = 2000 + Math.random() * 1000;
 
-updateHealth();
-// spawnTarget();
+//   setTimeout(() => {
+//     spawnTarget();
+//   }, delay);
+// }
+
+// updateHealth();
+// // spawnTarget();
