@@ -8,6 +8,7 @@ import AntiHero from "../../components/AntiHero";
 import LyricsRecorder from "../../components/LyricsRecord";
 import LyricsPlayer from "../../components/LyricsPlayer";
 import Header from "../../components/Header";
+import EditVideo from "../../components/EditVideo";
 
 function Home() {
   const HERO_IMAGES = [
@@ -26,6 +27,7 @@ function Home() {
       <StartComponent />
       {/* <LyricsRecorder /> */}
       <LyricsPlayer />;
+      <EditVideo />
       <SongPlayer />
       <Background />
       <Hero className="" images={[HERO_IMAGES[4]]} alt="Hero" />;

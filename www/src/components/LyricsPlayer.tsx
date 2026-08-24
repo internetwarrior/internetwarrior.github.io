@@ -40,7 +40,7 @@ export default function LyricsPlayer() {
 
   if (!hoverEffect)
     return (
-      <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center ">
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center ">
         <button
           className="bg-transparent text-white font-semibold !p-2 opacity-10 hover:opacity-100 transition-opacity duration-500"
           onClick={toggleHoverEffect}
@@ -55,7 +55,7 @@ export default function LyricsPlayer() {
     );
 
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center ">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center ">
       <button
         className="bg-transparent text-white font-semibold !p-2 opacity-10 hover:opacity-100 transition-opacity duration-500"
         onClick={toggleHoverEffect}
