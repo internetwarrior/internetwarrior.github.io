@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #e9edf2;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#theme {
+  z-index: 9999;
+}
+
+#playButton {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+
+  background: #2d7af1;
+  color: white;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+
+  cursor: pointer;
+  z-index: 1000;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
+}
+
+#playButton:hover {
+  background: #1d65d8;
+  transform: translateX(-50%) scale(1.05);
+}
+
+#playButton:active {
+  transform: translateX(-50%) scale(0.96);
+}

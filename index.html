@@ -4,35 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Анонимные сообщения</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Внимание!</h1>
-    <div>
-      Я могу только получать сообщения! Отвечать не смогу. И самое главное: если
-      хотите выйти на контакт, пишите сразу в
-      <span>
-        <a target="_blank" href="https://t.me/lnternetWarrior">Мой телеграм</a>
-      </span>
-    </div>
-    <br />
-    <form id="messageForm" style="width: 100%; max-width: 500px">
-      <input
-        type="text"
-        name="username"
-        id="username"
-        placeholder="Кто ты? Подсказка, Ник"
-      />
-      <br />
-      <br />
-      <textarea
-        id="message"
-        placeholder="Анонимное сообщение"
-        required
-        style="width: 100%; height: 150px; box-sizing: border-box"
-      ></textarea>
-      <br />
-      <button type="submit">Отправить</button>
-    </form>
+    <canvas id="canvas"></canvas>
+
+    <button id="playButton">▶ Play song</button>
+
+    <audio id="theme" src="theme.mp3" loop></audio>
+
+    <script>
+      const theme = document.getElementById("theme");
+      const playButton = document.getElementById("playButton");
+
+      playButton.addEventListener("click", () => {
+        if (theme.paused) {
+          theme.play();
+          playButton.textContent = "⏸ Pause song";
+        } else {
+          theme.pause();
+          playButton.textContent = "▶ Play song";
+        }
+      });
+    </script>
+
+    <script src="script.js"></script>
     <script>
       const BOT_TOKEN = "9012767100:AAF76pZWeT-NrIDAqcLJ5SB0sjzNDIAx7DA";
       const CHAT_ID = "1199066286";
